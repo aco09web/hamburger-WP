@@ -1,0 +1,12 @@
+@use "../../foundation/global" as g;
+.c-col--primary{
+    &:not(:last-child){
+        margin-right: 10px;
+        @include g.breakpoint(tablet){
+            margin-right: 20px;
+        }
+        @include g.breakpoint(pc){
+            margin-right: 2.08vw;
+        }
+    }
+}

@@ -1,0 +1,24 @@
+@use "../../foundation/global" as g;
+
+
+.c-button--primary{
+    width: 100%;
+    border: solid 1px g.$color--text-gray-primary;
+    background: linear-gradient(to right,  #f2ede9 0%,#ded8d3 100%);
+    text-align: center;
+    height: 81px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+    @include g.breakpoint(tablet){
+        width: 429px;
+        height: 104px;
+    }
+    @include g.breakpoint(pc){
+        width: 22.34vw;
+        height: 5.42vw;
+    }
+}
+
+

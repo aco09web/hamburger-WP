@@ -1,0 +1,81 @@
+@use "../../foundation/global" as g;
+.p-single--Hero{
+    width: 100%;
+    margin-bottom: 32px;
+    position: relative;
+    @include g.breakpoint(tablet){
+        margin-bottom: 40px;
+    }
+    @include g.breakpoint(pc){
+        margin-bottom: 3.28vw;
+    }
+}
+.p-single__image{
+    height: 60vw;
+    object-fit: cover;
+    object-position: 30%;
+    @include g.breakpoint(tablet){
+        height: 60.55vw;
+    }
+    @include g.breakpoint(pc){
+        height: 26.04vw;
+    }
+    }
+
+.p-single__title{
+    font-family: g.$font-title;
+    padding: 0 25px;
+    font-size: 3.6rem;
+    line-height: 1.172;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    @include g.breakpoint(tablet){
+        flex-direction: row;
+        font-size: 6.0rem;
+        padding: 12px 0 0 86px;
+    }
+    @include g.breakpoint(pc){
+        padding: 0 0.989vw 0 4.479vw;
+        font-size: 3.125vw;
+    }
+}
+.p-single{
+    padding: 0 20px;
+    margin-bottom: 60px;
+    @include g.breakpoint(tablet){
+        padding: 0 60px;
+        margin-bottom: 150px;
+    }
+    @include g.breakpoint(pc){
+        padding: 0 5.21vw;
+        margin-bottom: 14.06vw;
+    }
+}
+.p-single__img--full{
+    width: 100%;
+}
+.p-single__col__img{
+    width: calc(50% - 5px);
+    @include g.breakpoint(tablet){
+        width: calc(50% - 10px);
+    }
+    @include g.breakpoint(pc){
+        width: calc(50% - 1.04vw);
+    }
+}
+.p-single__col__text{
+    width: calc(50% - 5px);
+    @include g.breakpoint(tablet){
+        width: calc(50% - 10px);
+    }
+    @include g.breakpoint(pc){
+        width: calc(50% - 1.04vw);
+    }
+}
+.p-single__img--center{
+    text-align: center;
+}

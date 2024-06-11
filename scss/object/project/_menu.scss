@@ -1,0 +1,72 @@
+@use "../../foundation/global" as g;
+
+.p-menu{
+    padding: 178px 0 178px 46px;
+    display: block;
+    position: fixed;
+    width: 87.47vw;
+    height: 100%;
+    right: -100%;
+    top: 0;
+    z-index: 999;
+    overflow-y: scroll;
+    transition: all 0.5s;
+    transition-timing-function: ease-in-out;
+    @include g.breakpoint(tablet){
+        width: 44vw;
+    }
+    @include g.breakpoint(pc){
+        padding: 4.375vw 0 4.375vw 2.395vw;
+        width: 100%;
+        height: auto;
+        position: relative;
+        right: 0;
+        z-index: 0;
+        transition: none;
+    }
+}
+.p-menu.is-open{
+    right: 0;
+}
+.p-menu__title{
+    display: none;
+    @include g.breakpoint(pc){
+        display: block;
+        font-size: 1.770vw;
+        line-height: 2.022vw;
+        margin-bottom: 4.687vw;
+    }
+}
+.p-menu__list{
+    display: inline-block;
+    font-size: 2.4rem;
+    line-height: 1.485;
+    margin-bottom: 40px;
+    @include g.breakpoint(pc){
+        font-size: 1.25vw;
+        margin-bottom: 1.666vw;
+    }
+
+}
+
+.p-menu__subListBox{
+    padding-left: 20px;
+    margin-bottom: 20px;
+    @include g.breakpoint(pc){
+        margin-bottom: 2.5vw;
+        padding-left: 1.041vw;
+    }
+}
+.p-menu__subList{
+    font-size: 2rem;
+    line-height: 1.485;
+    margin-bottom: 20px;
+    &:last-child{
+        margin-bottom: 0;
+    }
+    @include g.breakpoint(pc){
+        font-size: 1.041vw;
+        line-height: 1.546vw;
+        margin-bottom: 1.041vw;
+    }
+}

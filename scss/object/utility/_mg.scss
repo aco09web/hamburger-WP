@@ -1,0 +1,13 @@
+@use "../../foundation/global" as g;
+.u-mg-left0{
+    margin-left: 0;
+}
+.u-mg-bottom--primary{
+    margin-bottom: 30px;
+    @include g.breakpoint(tablet){
+        margin-bottom: 60px;
+    }
+    @include g.breakpoint(pc){
+        margin-bottom: 3.13vw;
+    }
+}

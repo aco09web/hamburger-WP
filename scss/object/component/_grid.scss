@@ -1,0 +1,18 @@
+@use "../../foundation/global" as g;
+.c-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: center;
+    @include g.breakpoint(tablet){
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+    @include g.breakpoint(pc){
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1.04vw;
+    }
+
+}

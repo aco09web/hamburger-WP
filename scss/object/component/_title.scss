@@ -1,0 +1,12 @@
+@use "../../foundation/global" as g;
+
+.c-title--logo{
+    font-family: g.$font-title;
+    font-size: 4.0rem;
+    line-height: 1.172;
+    padding: 43px 0 40px;
+    @include g.breakpoint(pc){
+    font-size: 3.33vw;
+    padding: 0;
+    }
+}

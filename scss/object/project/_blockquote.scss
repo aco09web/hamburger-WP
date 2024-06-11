@@ -1,0 +1,26 @@
+@use "../../foundation/global" as g;
+.p-blockquote{
+    padding: 30px 20px;
+    @include g.breakpoint(tablet){
+        padding: 50px 53px;
+    }
+    @include g.breakpoint(pc){
+        padding: 2.6vw 2.86vw;
+    }
+}
+.p-blockquote__text{
+    margin-bottom: 30px;
+    @include g.breakpoint(tablet){
+        margin-bottom: 61px;
+    }
+    @include g.breakpoint(pc){
+        margin-bottom: 3.18vw;
+    }
+}
+.p-blockquote__source{
+    font-style: normal;
+}
+.p-blockquote__link{
+    text-decoration: underline;
+    color: g.$color--text-link;
+}

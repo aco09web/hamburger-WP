@@ -1,0 +1,29 @@
+@use "../../foundation/global" as g;
+.p-header{
+    text-align: center;
+    position: relative;
+    @include g.breakpoint(pc){
+    display: flex;
+    align-items: center;
+    padding-left: 3.38vw;
+    padding-right: 1.61vw;
+    justify-content: space-between;
+    }
+}
+.p-header__button--menu{
+    display: block;
+    font-size: 2.0rem;
+    line-height: 1.172;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    @include g.breakpoint(tablet){
+        font-size: 3.4rem;
+        line-height: 1.172;
+        top: 20px;
+        right: 25px;
+    }
+    @include g.breakpoint(pc){
+        display: none;
+    }
+}

@@ -1,0 +1,17 @@
+@use "../../foundation/global" as g;
+.c-text--white{
+    color: g.$color--text-white;
+}
+.c-text--brown{
+    color: g.$color--brown;
+}
+.c-text--gray--primary{
+    color: g.$color--text-gray-primary;
+}
+.c-text--gray--secondary{
+    color: g.$color--text-gray-secondary;
+}
+.c-text--bold{
+    font-weight: 700;
+}
+

@@ -1,0 +1,34 @@
+@use "../../foundation/global" as g;
+.p-table{
+    width: 100%;
+    border-collapse: collapse;
+    table-layout:fixed;
+}
+.p-table__row{
+    border: solid 1px g.$color--text-gray-primary;
+}
+.p-table__cell--left{
+    width: 42%;
+    padding: 29px 23px 24px;
+    border: solid 1px rgb(112, 112, 112);
+    @include g.breakpoint(tablet){
+        width: 30%;
+        padding: 29px 30px 24px;
+    }
+    @include g.breakpoint(pc){
+        width: 22.34vw;
+        padding: 1.51v 1.56vw 1.25vw;
+    }
+}
+.p-table__cell--right{
+    width: 58%;
+    padding: 29px 23px 24px;
+    @include g.breakpoint(tablet){
+        width: 70%;
+        padding: 29px 30px 24px;
+    }
+    @include g.breakpoint(pc){
+        width: 48.39vw;
+        padding: 1.51v 1.56vw 1.25vw;
+    }
+}

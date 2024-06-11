@@ -1,0 +1,18 @@
+@use "../../foundation/global" as g;
+
+.c-bg-color--white{
+    background-color: g.$color--background-white;
+}
+.c-bg-color--black{
+    background-color: g.$color--background-black;
+}
+.c-bg-color--gray{
+    background-color: g.$color--background-gray;
+}
+.c-bg-color--salmon-pink{
+    background-color: g.$color--background-salmon-pink;
+}
+.c-bg-color--skyblue{
+    background-color: g.$color--background-skyblue;
+}
+

@@ -1,0 +1,20 @@
+@use "../../foundation/global" as g;
+.p-ordered--primary{
+    list-style: decimal;
+    list-style-position: inside;
+    color: g.$color--card-brown;
+    @include g.breakpoint(tablet){
+        padding: 0 50px;
+    }
+    @include g.breakpoint(pc){
+        padding: 0 2.6vw;
+    }
+}
+.p-ordered--secondary{
+    list-style: decimal;
+    list-style-position: inside;
+    margin: 17px;
+    @include g.breakpoint(pc){
+        margin: 0.89vw;
+    }
+}

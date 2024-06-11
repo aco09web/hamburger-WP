@@ -1,0 +1,7 @@
+@use "../../foundation/global" as g;
+.p-pre{
+    padding: 50px;
+    @include g.breakpoint(pc){
+        padding: 2.6vw;
+    }
+}

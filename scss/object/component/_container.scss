@@ -1,0 +1,9 @@
+@use "../../foundation/global" as g;
+
+.c-container{
+    width: 100%;
+    @include g.breakpoint(pc){
+        width: 80.88%;
+    }
+}
+

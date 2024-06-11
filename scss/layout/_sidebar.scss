@@ -1,0 +1,8 @@
+@use "../foundation/global" as g;
+
+.l-sidebar{
+        display: block;
+    @include g.breakpoint(pc){
+        width: 19.11%;
+    }
+}

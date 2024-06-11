@@ -1,0 +1,23 @@
+@use "../../foundation/global" as g;
+
+.c-font--primary{
+    font-family: g.$font-main;
+}
+.c-font--title{
+    font-family: g.$font-title;
+}
+.c-font-size--primary{
+    font-size: 1.6rem;
+    line-height: 1.485;
+    @include g.breakpoint(tablet){
+        font-size: 1.6rem;
+    }
+    @include g.breakpoint(pc){
+        font-size: 0.83vw;
+        line-height: 1.24vw;
+    }
+}
+.c-font-size--secondary{
+    font-size: 1.4rem;
+    line-height: 1.485;
+}

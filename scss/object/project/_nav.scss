@@ -1,0 +1,75 @@
+@use "../../foundation/global" as g;
+
+
+.p-nav__bg-color{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    @include g.breakpoint(pc){
+        display: none;
+    }
+}
+.p-nav__bg-color.is-open{
+    opacity: 0.5;
+    visibility: visible;
+}
+.p-nav__btn--close{
+    transition: all 0.5s;
+    transition-timing-function: ease-in-out;
+    opacity: 0;
+    @include g.breakpoint(pc){
+        display: none;
+    }
+}
+.p-nav__btn--close.is-open{
+    display: block;
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    width: 46px;
+    height: 54px;
+    opacity: 1;
+    ::before{
+    position: absolute;
+    top: 24px;
+    left: 0;
+    content: "";
+    width: 48px;
+    height: 6px;
+    background-color: g.$color--text-gray-primary;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    transform: rotate(-45deg);
+    }
+    ::after{
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    content: "";
+    width: 48px;
+    height: 6px;
+    background-color: g.$color--text-gray-primary;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    transform: rotate(-135deg);
+    }
+    @include g.breakpoint(pc){
+        display: none;
+    }
+}
+.p-nav__btn--close__text{
+    display: block;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    @include g.breakpoint(pc){
+        display: none;
+    }
+}
