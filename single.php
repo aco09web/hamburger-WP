@@ -1,47 +1,26 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RaiseTechの課題サイトです。">
-    <title>RaiseTech（レイズテック） | ハンバーガーサイト</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link href="./css/style.css" rel="stylesheet">
-    <link rel=”icon” href=“/favicon.ico”>
-    <script defer src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script defer src="./js/main.js"></script>
-    </head>
-
-<body>
-<div class="c-wrapper">
-<div class="c-container">
-<header class="l-header p-header c-bg-color--salmon-pink">
-    <p class="c-title--logo c-text--bold c-text--gray--primary"><a href="#">Hamburger</a></p>
-    <form class="p-search--form" action="/" method="get">
-        <label class="p-search__label" for="header-search">検索</label>
-        <p class="p-search--box c-bg-color--white"><input id="header-search" type="text" name="header-search" placeholder=""></p>
-        <p><button class="p-search--submit c-text--bold c-text--gray--primary" type="submit">検索</button></p>
-    </form>
-    <a href="#" class="p-header__button--menu c-text--bold c-text--gray--primary c-font--title">Menu</a>
-</header>
+<?php get_header(); ?> <!--header.phpを読み込むテンプレートタグ（インクルードタグ）-->
 <main class="l-main">
 
     <section class="p-single--Hero">
         <h1 class="p-single__title c-text--bold c-text--white">h1 チーズバーガー</h1>
-
-            <!--<picture class="p-archive__image">
-                <source srcset="../images/archive-top-sp.webp" media="(max-width: 834px)" type="image/webp">
-                <source srcset="../images/archive-top-tab.webp" media="(max-width: 1200px)" type="image/webp">
-                <img src="../images/archive-top-pc.webp" alt=”hamburger”>
-            </picture>-->
-            <figure><img class="p-single__image" src="../images/single-top-cheese-pc.webp" alt=”チーズバーガー”></figure>
+        <figure><img class="p-single__image" src="<?php echo get_template_directory_uri(); ?>/images/single-top-cheese-pc.webp" alt=”チーズバーガー”></figure>
     </section>
 
+    <section>
+        <?php while (have_posts()) : the_post(); ?>
+            <h2><?php the_title(); ?></h2>
+            <?php the_content(); ?>
+        <?php endwhile; ?>
+    </section>
+
+
     <section class="c-section--container--secondary">
-        <h2 class="c-section__heading2 c-text--bold c-text--brown">見出しh2</h2>
-        <p class="c-section__text c-font-size--primary">Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。Pタグテキスト。</p>
+        <?php while (have_posts()) : the_post(); ?>
+            <h2 class="c-section__heading2 c-text--bold c-text--brown"><?php the_title(); ?></h2>
+            <p class="c-section__text c-font-size--primary"><?php the_content(); ?></p>
+        <?php endwhile; ?>
+
+
         <h3 class="c-section__heading3 c-text--bold c-text--brown">見出しh3</h3>
         <h4 class="c-section__heading4 c-text--bold c-text--brown">見出しh4</h4>
         <h5 class="c-section__heading5 c-text--bold c-text--brown">見出しh5</h5>
@@ -55,27 +34,27 @@
         </div>
     </section>
     <article class="p-single">
-        <figure class="p-single__img--full u-mg-bottom--primary"><img src="./images/article_02.webp" alt="hamburger"></figure>
+        <figure class="p-single__img--full u-mg-bottom--primary"><img src="<?php echo get_template_directory_uri(); ?>/images/article_02.webp" alt="hamburger"></figure>
         <div class="p-single__col c-flex u-mg-bottom--primary">
-            <figure class="p-single__col__img c-col--primary c-font-size--primary"><img src="./images/article_02.webp" alt="hamburger"></figure>
+            <figure class="p-single__col__img c-col--primary c-font-size--primary"><img src="<?php echo get_template_directory_uri(); ?>/images/article_02.webp" alt="hamburger"></figure>
             <p class="p-single__col__text c-col--primary">テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります</p>
         </div>
         <div class="p-single__col c-flex u-mg-bottom--primary">
             <p class="p-single__col__text c-col--primary c-font-size--primary">テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります テキストが入ります</p>
-            <figure class="p-single__col__img c-col--primary"><img src="./images/article_02.webp" alt="hamburger"></figure>
+            <figure class="p-single__col__img c-col--primary"><img src="<?php echo get_template_directory_uri(); ?>/images/article_02.webp" alt="hamburger"></figure>
         </div>
-        <figure class="p-single__img--center u-mg-bottom--primary"><img src="./images/article_03.webp" alt="hamburger"></figure>
+        <figure class="p-single__img--center u-mg-bottom--primary"><img src="<?php echo get_template_directory_uri(); ?>/images/article_03.webp" alt="hamburger"></figure>
         <div class="c-grid--container u-mg-bottom--primary">
             <ul class="c-grid">
-                <li class="c-grid__item"><img src="./images/article_03.webp" alt="hamburger"></li>
-                <li class="c-grid__item"><img src="./images/article_03.webp" alt="hamburger"></li>
-                <li class="c-grid__item"><img src="./images/article_03.webp" alt="hamburger"></li>
-                <li class="c-grid__item"><img src="./images/article_03.webp" alt="hamburger"></li>
-                <li class="c-grid__item"><img src="./images/article_03.webp" alt="hamburger"></li>
-                <li class="c-grid__item"><img src="./images/article_03.webp" alt="hamburger"></li>
-                <li class="c-grid__item"><img src="./images/article_03.webp" alt="hamburger"></li>
-                <li class="c-grid__item"><img src="./images/article_03.webp" alt="hamburger"></li>
-                <li class="c-grid__item"><img src="./images/article_03.webp" alt="hamburger"></li>
+                <li class="c-grid__item"><img src="<?php echo get_template_directory_uri(); ?>/images/article_03.webp" alt="hamburger"></li>
+                <li class="c-grid__item"><img src="<?php echo get_template_directory_uri(); ?>/images/article_03.webp" alt="hamburger"></li>
+                <li class="c-grid__item"><img src="<?php echo get_template_directory_uri(); ?>/images/article_03.webp" alt="hamburger"></li>
+                <li class="c-grid__item"><img src="<?php echo get_template_directory_uri(); ?>/images/article_03.webp" alt="hamburger"></li>
+                <li class="c-grid__item"><img src="<?php echo get_template_directory_uri(); ?>/images/article_03.webp" alt="hamburger"></li>
+                <li class="c-grid__item"><img src="<?php echo get_template_directory_uri(); ?>/images/article_03.webp" alt="hamburger"></li>
+                <li class="c-grid__item"><img src="<?php echo get_template_directory_uri(); ?>/images/article_03.webp" alt="hamburger"></li>
+                <li class="c-grid__item"><img src="<?php echo get_template_directory_uri(); ?>/images/article_03.webp" alt="hamburger"></li>
+                <li class="c-grid__item"><img src="<?php echo get_template_directory_uri(); ?>/images/article_03.webp" alt="hamburger"></li>
             </ul>
         </div>
         <div class="p-ordered--container c-font-size--primary u-mg-bottom--primary">
@@ -151,49 +130,7 @@
     </section>
 </main>
 </div>
-<div class="l-sidebar p-sidebar c-bg-color--gray">
-    <nav class="p-menu c-bg-color--gray">
-        <p class="p-menu__title c-text--bold c-text--gray--primary c-font--title">Menu</p>
-        <a href="#" class="p-nav__btn--close"><span class="p-nav__btn--close__text">メニューを閉じる</span></a>
-        <ul class="p-menu__listBox c-text--gray--primary">
-            <li><a class="p-menu__list c-text--bold" href="#">バーガー</a>
-                <ul class="p-menu__subListBox">
-                    <li class="p-menu__subList"><a href="#">ハンバーガー</a></li>
-                    <li class="p-menu__subList"><a href="#">チーズバーカー</a></li>
-                    <li class="p-menu__subList"><a href="#">テリヤキバーガー</a></li>
-                    <li class="p-menu__subList"><a href="#">アボカドバーガー</a></li>
-                    <li class="p-menu__subList"><a href="#">フィッシュバーガー</a></li>
-                    <li class="p-menu__subList"><a href="#">ベーコンバーガー</a></li>
-                    <li class="p-menu__subList"><a href="#">チキンバーガー</a></li>
-                </ul></li>
-            <li><a class="p-menu__list c-text--bold" href="#">サイド</a>
-                <ul class="p-menu__subListBox">
-                    <li class="p-menu__subList"><a href="#">ポテト</a></li>
-                    <li class="p-menu__subList"><a href="#">サラダ</a></li>
-                    <li class="p-menu__subList"><a href="#">ナゲット</a></li>
-                    <li class="p-menu__subList"><a href="#">コーン</a></li>
-                </ul></li>
-            <li><a class="p-menu__list c-text--bold" href="#">ドリンク</a>
-                <ul class="p-menu__subListBox">
-                    <li class="p-menu__subList"><a href="#">コーラ</a></li>
-                    <li class="p-menu__subList"><a href="#">ファンタ</a></li>
-                    <li class="p-menu__subList"><a href="#">オレンジ</a></li>
-                    <li class="p-menu__subList"><a href="#">アップル</a></li>
-                    <li class="p-menu__subList"><a href="#">紅茶（Ice/Hot）</a></li>
-                    <li class="p-menu__subList"><a href="#">コーヒー（Ice/Hot）</a></li>
-                </ul></li>
-        </ul>
-    </nav>
-</div>
+<?php get_sidebar(); ?>
 <div class="p-nav__bg-color c-bg-color--black"></div>
 </div>
-
-<footer class="l-footer p-footer">
-    <ul class="p-footer__listBox c-text--white">
-        <li class="p-footer__list"><a href="#">ショップ情報</a></li>
-        <li class="p-footer__list"><a href="#">ヒストリー</a></li>
-    </ul>
-    <small class="p-footer__copyright c-text--white">Copyright: RaiseTech</small>
-</footer>
-</body>
-</html>
+<?php get_footer(); ?> <!--footer.phpを読み込むテンプレートタグ（インクルードタグ）-->

@@ -16,7 +16,7 @@
         width: 44vw;
     }
     @include g.breakpoint(pc){
-        padding: 4.375vw 0 4.375vw 2.395vw;
+        padding: 0;
         width: 100%;
         height: auto;
         position: relative;

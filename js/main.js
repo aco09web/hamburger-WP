@@ -4,21 +4,21 @@ const blackBg = document.querySelector('.p-nav__bg-color');
 const closeBtn = document.querySelector('.p-nav__btn--close');
 
 
-$(btn).click(function () {
-  $(this).toggleClass('is-open');
-    $(content).toggleClass('is-open');
-    $(closeBtn).toggleClass('is-open');
-    $(blackBg).toggleClass('is-open');
+jQuery(btn).click(function () {
+  jQuery(this).toggleClass('is-open');
+    jQuery(content).toggleClass('is-open');
+    jQuery(closeBtn).toggleClass('is-open');
+    jQuery(blackBg).toggleClass('is-open');
 });
 
-$(".p-menu a").click(function () {
-    $(content).removeClass('is-open');
-    $(closeBtn).removeClass('is-open');
-    $(blackBg).removeClass('is-open');
+jQuery(closeBtn).click(function () {
+    jQuery(content).removeClass('is-open');
+    jQuery(closeBtn).removeClass('is-open');
+    jQuery(blackBg).removeClass('is-open');
 });
-$(blackBg).click(function () {
-    $(content).removeClass('is-open');
-    $(closeBtn).removeClass('is-open');
-    $(blackBg).removeClass('is-open');
+jQuery(blackBg).click(function () {
+    jQuery(content).removeClass('is-open');
+    jQuery(closeBtn).removeClass('is-open');
+    jQuery(blackBg).removeClass('is-open');
 });
 

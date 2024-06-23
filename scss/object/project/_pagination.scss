@@ -1,15 +1,5 @@
 @use "../../foundation/global" as g;
 
-.p-pagination--sp{
-    display: flex;
-    justify-content: space-between;
-    padding: 0 46px;
-    margin: 61px 0 32px;
-    color: g.$color--gray;
-    @include g.breakpoint(tablet){
-        display: none;
-    }
-}
 .p-pagination__prev{
     position: relative;
     &::before{
@@ -64,19 +54,20 @@
         right: -23px;
     }
 }
-.p-pagination--pc{
-    display: none;
+.p-pagination{
+    padding: 0;
+    margin: 61px 0 32px;
+    color: g.$color--gray;
+    font-family: g.$font-title;
+    font-size: 1.6rem;
+    line-height: 2.063;
     @include g.breakpoint(tablet){
-        display: flex;
-        justify-content: center;
         margin: 106px 0 32px;
-        color: g.$color--gray;
-        font-family: g.$font-title;
-        font-size: 1.6rem;
-        line-height: 2.063;
     }
     @include g.breakpoint(pc){
         margin: 150px 0 64px;
+        display: flex;
+        justify-content: center;
     }
 }
 .p-pagination__link--current{
@@ -85,21 +76,33 @@
 }
 .p-pagination__list{
     display: flex;
+    justify-content: space-between;
     margin: 0 54px;
-    position: relative;
+    @include g.breakpoint(pc){
+        margin: 0 54px 0 0;
+        position: relative;
+    }
 }
 .p-pagination__list__link{
-    margin-left: 15px;
-    width: 35px;
-    height: 35px;
-    border: solid 1px g.$color--gray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none;
+    @include g.breakpoint(pc){
+        margin: 0 7.5px;
+        width: 35px;
+        height: 35px;
+        border: solid 1px g.$color--gray;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .p-pagination__arrow-prev{
     position: relative;
+    line-height: 2.1;
+    @include g.breakpoint(pc){
+        font-size: 0;
+        line-height: 1.7;
+    }
     &::before{
         content: "";
         display: inline-block;
@@ -110,7 +113,7 @@
         transform: rotate(-135deg);
         position: absolute;
         top: 10px;
-        left: -30px;
+        left: -24px;
     }
     &::after{
         content: "";
@@ -122,11 +125,16 @@
         transform: rotate(-135deg);
         position: absolute;
         top: 10px;
-        left: -39px;
+        left: -33px;
     }
 }
 .p-pagination__arrow-next{
     position: relative;
+    line-height: 2.1;
+    @include g.breakpoint(pc){
+        font-size: 0;
+        line-height: 1.7;
+    };
     &::before{
         content: "";
         display: inline-block;
@@ -150,5 +158,11 @@
         position: absolute;
         top: 10px;
         right: -33px;
+    }
+}
+.pagination__text{
+    display: none;
+    @include g.breakpoint(pc){
+        display: block;
     }
 }

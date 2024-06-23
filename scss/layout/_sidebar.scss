@@ -4,5 +4,6 @@
         display: block;
     @include g.breakpoint(pc){
         width: 19.11%;
+        padding: 4.375vw 0 4.375vw 2.395vw;
     }
 }
