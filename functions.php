@@ -3,6 +3,8 @@
 add_theme_support('title-tag');
 // アイキャッチ画像を利用できるようにする
 add_theme_support('post-thumbnails');
+//エディタスタイルを利用できるようにする
+add_theme_support('editor-styles');
 
 //タイトル出力
 function hamburger_title($title)
@@ -140,7 +142,7 @@ function my_set_page_categories($query)
 
 
 
-//ページャーのクラス名変更/*w-pagenavi　css置換　*/
+//ページャーのクラス名変更/*w-pagenavi css置換 */
 // 現在のページ数部分に付与されるclass
 function wp_pagenavi_class_pages_func($class_name)
 {
@@ -176,20 +178,6 @@ function wp_pagenavi_class_nextpostslink_func($class_name)
 }
 add_filter('wp_pagenavi_class_nextpostslink', 'wp_pagenavi_class_nextpostslink_func');
 
-// 先頭へのリンクに付与されるclass
-function wp_pagenavi_class_first_func($class_name)
-{
-    return 'custom-first';
-}
-add_filter('wp_pagenavi_class_first', 'wp_pagenavi_class_first_func');
-
-// 最後へのリンクに付与されるclass
-function wp_pagenavi_class_last_func($class_name)
-{
-    return 'custom-last';
-}
-add_filter('wp_pagenavi_class_last', 'wp_pagenavi_class_last_func');
-
 // 現在位置の数字に付与されるclass
 function wp_pagenavi_class_current_func($class_name)
 {
@@ -197,105 +185,39 @@ function wp_pagenavi_class_current_func($class_name)
 }
 add_filter('wp_pagenavi_class_current', 'wp_pagenavi_class_current_func');
 
-// 数字のリンクに付与されるclass
-function wp_pagenavi_class_page_func($class_name)
+
+
+//エディターとサイトのフロントの両方でeditor-style.cssを読み込ませる
+function hamburger_enqueue_styles()
 {
-    return 'custom-page';
-}
-add_filter('wp_pagenavi_class_page', 'wp_pagenavi_class_page_func');
-
-// 数字の省略部分に付与されるclass
-function wp_pagenavi_class_extend_func($class_name)
-{
-    return 'custom-extend';
-}
-add_filter('wp_pagenavi_class_extend', 'wp_pagenavi_class_extend_func');
-
-
-
-
-//カテゴリーのカスタムフィールドを追加
-//wp-admin/edit-tags.php?taxonomy=categoryにフィールドを作る
-/*--
-add_action('category_add_form_fields', 'category_add_form_fields');
-function category_add_form_fields()
-{
-    $default_field_name = '';
-    $html = '
-  <div class="form-field">
-    <label for="term_meta[category_field_name]">カテゴリーのカスタムフィールド</label>
-    <input type="text" name="term_meta[category_field_name]" id="term_meta[category_field_name]" value="' . $default_field_name . '">
-  </div>
-  ';
-    echo $html;
+    wp_enqueue_style('editor-style', get_template_directory_uri() . '/css/editor-style.css');
 }
 
-//wp-admin/term.php?taxonomy=categoryにフィールドを作る
-add_action('category_edit_form_fields', 'category_edit_form_fields');
-function category_edit_form_fields($tag)
-{
-    $term_id = $tag->term_id;
-    $term_meta = get_option("taxonomy_$term_id");
-    $term_meta['category_field_name'] = isset($term_meta['category_field_name']) ? $term_meta['category_field_name'] : '';
-    $html = '
-  <tr class="form-field">
-    <th scope="row" valign="top"><label for="term_meta[category_field_name]">カテゴリーのカスタムフィールド</label></th>
-    <td>
-      <input type="text" name="term_meta[category_field_name]" id="term_meta[category_field_name]" value="' . esc_attr($term_meta['category_field_name']) . '">
-    </td>
-  </tr>
-  ';
-    echo $html;
-}
+add_action('enqueue_block_assets', 'hamburger_enqueue_styles');
 
-//追加した項目を保存
-add_action('edited_category', 'save_taxonomy_custom_meta', 10, 2);
-add_action('created_category', 'save_taxonomy_custom_meta', 10, 2);
-function save_taxonomy_custom_meta($term_id)
+//投稿ページのみ検索されるように設定
+function my_posy_search($search)
 {
-    if (isset($_POST['term_meta'])) {
-        $t_id = $term_id;
-        $term_meta = get_option("taxonomy_$t_id");
-        $cat_keys = array_keys($_POST['term_meta']);
-        foreach ($cat_keys as $key) {
-            if (isset($_POST['term_meta'][$key])) {
-                $term_meta[$key] = $_POST['term_meta'][$key];
-            }
+    if (is_search()) {
+        $search .= " AND post_type = 'post'";
+    }
+    return $search;
+}
+add_filter('posts_search', 'my_posy_search');
+
+//何も記入せずに検索をすると、TOPページにリダイレクトされる設定
+function empty_search_redirect($wp_query)
+{
+    if ($wp_query->is_main_query() && $wp_query->is_search && !$wp_query->is_admin) {
+        $s = $wp_query->get('s');
+        $s = trim($s);
+        if (empty($s)) {
+            wp_safe_redirect(home_url('/'));
+            exit;
         }
-        update_option("taxonomy_$t_id", $term_meta);
     }
 }
---*/
-
-
-
-
-
-
-
-
-
-
-/*<?php // カテゴリーのカスタムフィールドを表示
-            $categories = get_categories();
-            foreach ($categories as $category) :
-                $catname = '';
-                $category_color = '';
-                $category_field_name = '';
-                if ($category) {
-                    $catname = $category->cat_name;
-                    //追加項目の取得
-                    $category_id = get_cat_ID($catname);
-                    $term_meta = get_option("taxonomy_$category_id");
-                    $category_field_name = isset($term_meta['category_field_name']) ? $term_meta['category_field_name'] : '';
-                }
-            ?>
-                <?php if ($category_field_name) : ?>
-                    <?= $category_field_name ?>
-                <?php endif; ?>
-            <?php endforeach; ?>*/
-
-
+add_action('parse_query', 'empty_search_redirect');
 
 
 

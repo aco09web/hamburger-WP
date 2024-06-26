@@ -1,0 +1,485 @@
+@use "../../foundation/global" as g;
+
+
+.editor-styles-wrapper{
+    .c-text--white{
+        color: g.$color--text-white;
+    }
+    .c-text--brown{
+        color: g.$color--brown;
+    }
+    .c-text--gray--primary{
+        color: g.$color--text-gray-primary;
+    }
+    .c-text--gray--secondary{
+        color: g.$color--text-gray-secondary;
+    }
+    .c-text--bold{
+        font-weight: 700;
+    }
+    .c-font--primary{
+    font-family: g.$font-main;
+    }
+    .c-font--title{
+        font-family: g.$font-title;
+    }
+    .c-font-size--primary{
+        font-size: 1.6rem;
+        line-height: 1.485;
+        @include g.breakpoint(tablet){
+            font-size: 1.6rem;
+        }
+        @include g.breakpoint(pc){
+            font-size: 0.83vw;
+            line-height: 1.24vw;
+        }
+    }
+    .c-font-size--secondary{
+        font-size: 1.4rem;
+        line-height: 1.485;
+    }
+    .c-bg-color--white{
+        background-color: g.$color--background-white;
+    }
+    .c-bg-color--black{
+        background-color: g.$color--background-black;
+    }
+    .c-bg-color--gray{
+        background-color: g.$color--background-gray;
+    }
+    .c-bg-color--salmon-pink{
+        background-color: g.$color--background-salmon-pink;
+    }
+    .c-bg-color--skyblue{
+        background-color: g.$color--background-skyblue;
+    }
+    .c-col--primary{
+    &:not(:last-child){
+        margin-right: 10px;
+        @include g.breakpoint(tablet){
+            margin-right: 20px;
+        }
+        @include g.breakpoint(pc){
+            margin-right: 2.08vw;
+        }
+    }
+    }
+    .c-button--primary a{
+    width: 100%;
+    border: solid 1px g.$color--text-gray-primary;
+    background: linear-gradient(to right,  #f2ede9 0%,#ded8d3 100%);
+    text-align: center;
+    height: 81px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+    @include g.breakpoint(tablet){
+        width: 429px;
+        height: 104px;
+    }
+    @include g.breakpoint(pc){
+        width: 22.34vw;
+        height: 5.42vw;
+    }
+    }
+    .c-button--primary div{
+    width: 100%;
+    border: solid 1px g.$color--text-gray-primary;
+    background: linear-gradient(to right,  #f2ede9 0%,#ded8d3 100%);
+    text-align: center;
+    height: 81px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+    @include g.breakpoint(tablet){
+        width: 429px;
+        height: 104px;
+    }
+    @include g.breakpoint(pc){
+        width: 22.34vw;
+        height: 5.42vw;
+    }
+    }
+    .c-grid{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+        @include g.breakpoint(tablet){
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @include g.breakpoint(pc){
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.04vw;
+        }
+    }
+    .p-blockquote{
+        padding: 30px 20px;
+        @include g.breakpoint(tablet){
+            padding: 50px 53px;
+        }
+        @include g.breakpoint(pc){
+            padding: 2.6vw 2.86vw;
+        }
+    }
+    .p-blockquote__text{
+        margin-bottom: 30px;
+        @include g.breakpoint(tablet){
+            margin-bottom: 61px;
+        }
+        @include g.breakpoint(pc){
+            margin-bottom: 3.18vw;
+        }
+    }
+    .p-blockquote__source{
+        font-style: normal;
+    }
+    .p-blockquote__link{
+        text-decoration: underline;
+        color: g.$color--text-link;
+    }
+
+    .p-single--Hero{
+        width: 100%;
+        margin-bottom: 32px;
+        position: relative;
+        @include g.breakpoint(tablet){
+            margin-bottom: 40px;
+        }
+        @include g.breakpoint(pc){
+            margin-bottom: 3.28vw;
+        }
+    }
+    .p-single__image{
+        height: 60vw;
+        object-fit: cover;
+        object-position: 30%;
+        @include g.breakpoint(tablet){
+            height: 60.55vw;
+        }
+        @include g.breakpoint(pc){
+            height: 26.04vw;
+        }
+        }
+
+    .p-single__title{
+        font-family: g.$font-title;
+        padding: 0 25px;
+        font-size: 3.6rem;
+        line-height: 1.172;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        @include g.breakpoint(tablet){
+            flex-direction: row;
+            font-size: 6.0rem;
+            padding: 12px 0 0 86px;
+        }
+        @include g.breakpoint(pc){
+            padding: 0 0.989vw 0 4.479vw;
+            font-size: 3.125vw;
+        }
+    }
+    .p-single{
+        padding: 0 20px;
+        margin-bottom: 60px;
+        @include g.breakpoint(tablet){
+            padding: 0 60px;
+            margin-bottom: 150px;
+        }
+        @include g.breakpoint(pc){
+            padding: 0 5.21vw;
+            margin-bottom: 14.06vw;
+        }
+    }
+    .p-single__img--full{
+        width: 100%;
+    }
+    .p-single__col__img{
+        width: calc(50% - 5px);
+        @include g.breakpoint(tablet){
+            width: calc(50% - 10px);
+        }
+        @include g.breakpoint(pc){
+            width: calc(50% - 1.04vw);
+        }
+    }
+    .p-single__col__text{
+        width: calc(50% - 5px);
+        @include g.breakpoint(tablet){
+            width: calc(50% - 10px);
+        }
+        @include g.breakpoint(pc){
+            width: calc(50% - 1.04vw);
+        }
+    }
+    .p-single__img--center{
+        text-align: center;
+    }
+    .p-ordered--primary{
+    list-style: decimal;
+    list-style-position: inside;
+    color: g.$color--card-brown;
+    @include g.breakpoint(tablet){
+        padding: 0 50px;
+    }
+    @include g.breakpoint(pc){
+        padding: 0 2.6vw;
+    }
+    }
+    .p-ordered--secondary{
+        list-style: decimal;
+        list-style-position: inside;
+        margin: 17px;
+        @include g.breakpoint(pc){
+            margin: 0.89vw;
+        }
+    }
+    .p-unordered--primary{
+    color: g.$color--card-brown;
+    @include g.breakpoint(tablet){
+        padding: 0 50px;
+    }
+    @include g.breakpoint(pc){
+        padding: 0 2.6vw;
+    }
+    }
+    .p-unordered--secondary{
+        margin: 17px;
+        @include g.breakpoint(pc){
+            margin: 0.89vw;
+        }
+    }
+    .p-pre{
+    padding: 50px;
+    @include g.breakpoint(pc){
+        padding: 2.6vw;
+    }
+    }
+    .p-table{
+    width: 100%;
+    border-collapse: collapse;
+        table-layout:fixed;
+    }
+    .p-table__row{
+        border: solid 1px g.$color--text-gray-primary;
+    }
+    .p-table__cell--left{
+        width: 42%;
+        padding: 29px 23px 24px;
+        border: solid 1px rgb(112, 112, 112);
+        @include g.breakpoint(tablet){
+            width: 30%;
+            padding: 29px 30px 24px;
+        }
+        @include g.breakpoint(pc){
+            width: 22.34vw;
+            padding: 1.51v 1.56vw 1.25vw;
+        }
+    }
+    .p-table__cell--right{
+        width: 58%;
+        padding: 29px 23px 24px;
+        @include g.breakpoint(tablet){
+            width: 70%;
+            padding: 29px 30px 24px;
+        }
+        @include g.breakpoint(pc){
+            width: 48.39vw;
+            padding: 1.51v 1.56vw 1.25vw;
+        }
+    }
+    p{
+    color: g.$color--brown;
+    margin-bottom: 20px;
+    @include g.breakpoint(tablet){
+        margin-bottom: 37px;
+    }
+    @include g.breakpoint(pc){
+        margin-bottom: 3.64vw;
+    }
+    }
+    blockquote {
+    background-color: g.$color--background-skyblue;
+        padding: 30px 20px;
+        margin-bottom: 30px;
+    @include g.breakpoint(tablet){
+        padding: 50px 53px;
+        margin-bottom: 60px;
+    }
+    @include g.breakpoint(pc){
+        padding: 2.6vw 2.86vw;
+        margin-bottom: 3.13vw;
+    }
+    }
+    cite a{
+        text-decoration: underline;
+        color: g.$color--text-link;
+        }
+    h1 {
+        font-family: g.$font-title;
+        font-size: 3.6rem;
+        line-height: 1.172;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        @include g.breakpoint(tablet){
+            flex-direction: row;
+            font-size: 6.0rem;
+        }
+        @include g.breakpoint(pc){
+            font-size: 3.125vw;
+        }
+    }
+
+    h2 {
+        color: g.$color--brown;
+        font-size: 2.8rem;
+        line-height: 1.485;
+        margin-bottom: 25px;
+        @include g.breakpoint(tablet){
+            font-size: 3.6rem;
+            margin-bottom: 20px;
+        }
+        @include g.breakpoint(pc){
+            font-size: 1.875vw;
+            line-height: 2.78vw;
+            margin-bottom: 1.04vw;
+        }
+    }
+    h3{
+        color: g.$color--brown;
+        font-size: 2.4rem;
+        line-height: 1.485;
+        margin-bottom: 25px;
+        @include g.breakpoint(tablet){
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        @include g.breakpoint(pc){
+            font-size: 1.46vw;
+            line-height: 2.17vw;
+            margin-bottom: 1.04vw;
+        }
+    }
+    h4{
+        color: g.$color--brown;
+        font-size: 2.0rem;
+        line-height: 1.485;
+        margin-bottom: 34px;
+        @include g.breakpoint(tablet){
+            margin-bottom: 20px;
+        }
+        @include g.breakpoint(pc){
+            font-size: 1.04vw;
+            line-height: 1.55vw;
+            margin-bottom: 1.04vw;
+        }
+    }
+    h5{
+        color: g.$color--brown;
+        font-size: 2.0rem;
+        line-height: 1.485;
+        margin-bottom: 27px;
+        @include g.breakpoint(tablet){
+            margin-bottom: 20px;
+        }
+        @include g.breakpoint(pc){
+            font-size: 1.04vw;
+            line-height: 1.55vw;
+            margin-bottom: 1.04vw;
+        }
+    }
+    h6{
+        color: g.$color--brown;
+        font-size: 2.0rem;
+        line-height: 1.485;
+        margin-bottom: 26px;
+        @include g.breakpoint(tablet){
+            margin-bottom: 20px;
+        }
+        @include g.breakpoint(pc){
+            font-size: 1.04vw;
+            line-height: 1.55vw;
+            margin-bottom: 1.04vw;
+        }
+    }
+    ol{
+    list-style: decimal;
+    list-style-position: inside;
+    color: g.$color--card-brown;
+    @include g.breakpoint(tablet){
+        padding: 0 50px;
+    }
+    @include g.breakpoint(pc){
+        padding: 0 2.6vw;
+    }
+    }
+    ul{
+    color: g.$color--card-brown;
+    @include g.breakpoint(tablet){
+        padding: 0 50px;
+    }
+    @include g.breakpoint(pc){
+        padding: 0 2.6vw;
+    }
+    }
+    pre{
+        padding: 50px;
+        font-size: 1.6rem;
+        line-height: 1.485;
+        background-color: g.$color--background-skyblue;
+        color: g.$color--brown;
+        @include g.breakpoint(tablet){
+            font-size: 1.6rem;
+        }
+        @include g.breakpoint(pc){
+            padding: 2.6vw;
+            font-size: 0.83vw;
+            line-height: 1.24vw;
+        }
+    }
+    code{
+        font-size: 1.6rem;
+        line-height: 1.485;
+        color: g.$color--brown;
+        @include g.breakpoint(tablet){
+            font-size: 1.6rem;
+        }
+        @include g.breakpoint(pc){
+            font-size: 0.83vw;
+            line-height: 1.24vw;
+        }
+    }
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        table-layout:fixed;
+    }
+    table tr{
+        width: 100%;
+        border-collapse: collapse;
+        table-layout:fixed;
+    }
+    table tr td{
+        width: 42%;
+        padding: 29px 23px 24px;
+        border: solid 1px rgb(112, 112, 112);
+        @include g.breakpoint(tablet){
+            width: 30%;
+            padding: 29px 30px 24px;
+        }
+        @include g.breakpoint(pc){
+            width: 22.34vw;
+            padding: 1.51v 1.56vw 1.25vw;
+    }
+    }
+}

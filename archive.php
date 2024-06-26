@@ -11,11 +11,7 @@
                 ?>
                 <?php echo $cat->cat_name; ?></span>
         </h1>
-        <!--<picture class="p-archive__image">
-                <source srcset="../images/archive-top-sp.webp" media="(max-width: 834px)" type="image/webp">
-                <source srcset="../images/archive-top-tab.webp" media="(max-width: 1200px)" type="image/webp">
-                <img src="../images/archive-top-pc.webp" alt=”hamburger”>
-            </picture>-->
+
         <figure><img class="p-archive__image" src="<?php echo get_template_directory_uri(); ?>/images/archive-top-pc.webp" alt=”hamburger”></figure>
     </section>
 
@@ -62,7 +58,7 @@
                                     $content = strip_tags($content);
                                     // ショートコードの除去
                                     $content = strip_shortcodes($content);
-                                    echo $content; ?></p>
+                                    echo wp_trim_words(get_the_content(), 126, '...'); ?></p>
                                 <div class="p-card__link--container"><a href="<?php the_permalink(); ?>" class="p-card__link c-text--bold c-bg-color--white c-text--gray--primary">詳しく見る</a></div>
                             </div>
                         </div>

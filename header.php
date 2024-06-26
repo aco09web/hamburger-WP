@@ -10,7 +10,19 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<?php
+// ベースとなるクラス名
+$body_class = 'basic_class';
+// トップページのみ表示するクラス名
+if (is_front_page()) {
+    $body_class .= ' front-page';
+    // 個別ページのみ表示するクラス名
+} elseif (is_single()) {
+    $body_class .= ' single-page';
+}
+?>
+
+<body class="<?php echo $body_class; ?>">
     <div class="c-wrapper">
         <div class="c-container">
             <header class="l-header p-header c-bg-color--salmon-pink">
