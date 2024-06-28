@@ -1,5 +1,5 @@
                 <?php
-                if (is_search()) $search_query = get_search_query();
+                if (is_search()) $search_query = esc_html(get_search_query());
                 ?>
                 <form class="p-search--form" method="get" action="<?php echo home_url('/'); ?>">
                     <label class="p-search__label" for="header-search">検索</label>

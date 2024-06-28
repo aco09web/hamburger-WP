@@ -8,8 +8,60 @@
             <dt class="p-contents__title c-text--gray--secondary c-text--bold c-font--title">Take Out</dt>
             <div>
                 <dd class="p-contents__text">
-                    <p class="p-contents__subTitle c-text--bold">Take OUT</p>
-                    <p class="p-contents__subText">当店のテイクアウトで利用できる商品を掲載しています当店のテイクアウトで利用できる商品を掲載しています当店のテイクアウトで利用できる商品を掲載しています当店のテイクアウトで利用できる商品を掲載しています当店のテイクアウトで利用できる商品を掲載しています当店のテイクアウトで</p>
+                    <?php
+                    $args = array(
+                        'post_type' => 'takeout', //カスタム投稿タイプ名
+                        'posts_per_page' => 2, //取得する投稿の件数
+                    );
+                    $the_query = new WP_Query($args);
+                    ?>
+                    <?php if ($the_query->have_posts()) : // 投稿がある場合 
+                    ?>
+                        <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+                            <!-- ここに投稿がある場合の記述 -->
+                            <p class="p-contents__subTitle c-text--bold"><?php the_title(); ?></p>
+                            <p class="p-contents__subText"><?php
+                                                            // HTMLタグの除去
+                                                            $content = strip_tags($content);
+                                                            // ショートコードの除去
+                                                            $content = strip_shortcodes($content);
+                                                            echo $content(); ?></p>
+                        <?php endwhile; ?>
+                    <?php else : ?>
+                        <!-- ここに投稿がない場合の記述 -->
+                    <?php endif;
+                    wp_reset_postdata(); ?>
+
+
+                    <?php
+                    $event_args = [
+                        'post_type' => 'takeout', // カスタム投稿名が「event」の場合
+                        'posts_per_page' => 5, // 表示する数
+                    ];
+                    $event_posts = get_posts($event_args); ?>
+
+                    <?php if ($event_posts) : foreach ($event_posts as $post) : setup_postdata($post); // 投稿がある場合 
+                    ?>
+
+                            <!-- ▽ ループ開始 ▽ -->
+
+                            <li>
+                                <p><?php the_time('Y年 n月'); ?></p>
+                                <h3><?php the_title(); ?></h3>
+                                <?php the_content(); ?>
+                            </li>
+
+                            <!-- △ ループ終了 △ -->
+
+                        <?php endforeach; ?>
+
+                    <?php else : // 記事がない場合 
+                    ?>
+
+                        <li>まだ投稿がありません。</li>
+
+                    <?php endif;
+                    wp_reset_postdata(); ?>
                 </dd>
                 <dd class="p-contents__text">
                     <p class="p-contents__subTitle c-text--bold c-font--title">Take OUT</p>

@@ -219,44 +219,72 @@ function empty_search_redirect($wp_query)
 }
 add_action('parse_query', 'empty_search_redirect');
 
-
-
-
-//ウィジェットが扱えるよう設定
-function wpbeg_widgets_init()
+//投稿を古い順に並び変える
+function change_old($query)
 {
-    register_sidebar(
+    $query->set('order', 'ASC');
+    $query->set('orderby', 'date');
+}
+add_action('pre_get_posts', 'change_old');
+
+
+//TakeOutとEatInのカスタム投稿
+/* ---------- カスタム投稿タイプを追加 ---------- */
+add_action('init', 'create_post_type');
+
+function create_post_type()
+{
+
+    register_post_type(
+        'takeout',
         array(
-            'name'          => 'カテゴリーウィジェット',
-            'id'            => 'category_widget',
-            'description'   => 'カテゴリー用ウィジェットです',
-            'before_widget' => '<div id="%1$s" class="widget %2$s">',
-            'after_widget'  => '</div>',
-            'before_title'  => '<h2><i class="fa fa-folder-open" aria-hidden="true"></i>',
-            'after_title'   => "</h2>\n",
+            'label' => 'TakeOut',
+            'public' => true,
+            'has_archive' => true,
+            'show_in_rest' => true,
+            'menu_position' => 5,
+            'supports' => array(
+                'title',
+                'editor',
+                'thumbnail',
+                'revisions',
+            ),
         )
     );
-    register_sidebar(
+    register_post_type(
+        'eatin',
         array(
-            'name'          => 'タグウィジェット',
-            'id'            => 'tag_widget',
-            'description'   => 'タグ用ウィジェットです',
-            'before_widget' => '<div id="%1$s" class="widget %2$s">',
-            'after_widget'  => '</div>',
-            'before_title'  => '<h2><i class="fa fa-tags" aria-hidden="true"></i>',
-            'after_title'   => "</h2>\n",
-        )
-    );
-    register_sidebar(
-        array(
-            'name'          => 'アーカイブウィジェット',
-            'id'            => 'archive_widget',
-            'description'   => 'アーカイブ用ウィジェットです',
-            'before_widget' => '<div id="%1$s" class="widget %2$s">',
-            'after_widget'  => '</div>',
-            'before_title'  => '<h2><i class="fa fa-archive" aria-hidden="true"></i>',
-            'after_title'   => "</h2>\n",
+            'label' => 'EatIn',
+            'public' => true,
+            'has_archive' => true,
+            'show_in_rest' => true,
+            'menu_position' => 6,
+            'supports' => array(
+                'title',
+                'editor',
+                'thumbnail',
+                'revisions',
+            ),
         )
     );
 }
-add_action('widgets_init', 'wpbeg_widgets_init');
+
+
+/**
+ * カスタム投稿の記事知覧で並び順を日付降順に変更
+ */
+function change_post_types_admin_order($wp_query)
+{
+    if (is_admin()) {
+        $post_type_array = array('takeout', 'eatin'); // カスタム投稿のスラッグ（post_type）
+        $post_type = $wp_query->query['post_type'];
+        $get_orderby = get_query_var('orderby');
+        if ($post_type && $get_orderby) {
+            if (in_array($post_type, $post_type_array) && $get_orderby === 'menu_order title') {
+                $wp_query->set('orderby', 'date'); // data = 日付
+                $wp_query->set('order', 'DESC'); // DESC = 降順
+            }
+        }
+    }
+}
+add_filter('pre_get_posts', 'change_post_types_admin_order');

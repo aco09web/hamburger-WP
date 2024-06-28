@@ -1,7 +1,7 @@
 <?php get_header(); ?> <!--header.phpを読み込むテンプレートタグ（インクルードタグ）-->
 <main class="l-main">
     <section class="p-archive--Hero c-bg-color--black">
-        <h1 class="p-archive__title c-text--bold c-text--white c-font--title">Search:<span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary"><?php echo get_search_query(); ?></span></h1>
+        <h1 class="p-archive__title c-text--bold c-text--white c-font--title">Search:<span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary"><?php echo esc_html(get_search_query()); ?></span></h1>
 
         <figure><img class="p-archive__image" src="<?php echo get_template_directory_uri(); ?>/images/archive-top-pc.webp" alt=”hamburger”></figure>
     </section>
@@ -60,9 +60,10 @@
         </ul>
         <!--投稿内容の繰り返し処理が終わって一度のみ何かをしたいときはココに書く-->
     <?php else : ?>
-        <p>投稿データがありません</p>
+        <p>検索したキーワードに合致するデータがありません</p>
         <!--//投稿データがない場合の処理「投稿記事がありません」とフロントで表示させる-->
     <?php endif; ?>
+
     <?php if (function_exists('wp_pagenavi')) :
         wp_pagenavi(array(
             'before' => '<div class="p-pagination c-text--gray--primary c-font--title">',

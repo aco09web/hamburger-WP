@@ -4,12 +4,9 @@
     <section class="p-archive--Hero c-bg-color--black">
         <h1 class="p-archive__title c-text--bold c-text--white c-font--title">Menu:
             <span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary">
-                <?php
-                // カテゴリーのデータを取得
-                $cat = get_the_category();
-                $cat = $cat[0];
-                ?>
-                <?php echo $cat->cat_name; ?></span>
+
+                <?php single_cat_title(); ?>
+            </span>
         </h1>
 
         <figure><img class="p-archive__image" src="<?php echo get_template_directory_uri(); ?>/images/archive-top-pc.webp" alt=”hamburger”></figure>
@@ -26,8 +23,10 @@
                 $category_meta = get_option("category_$category->term_id");
             }
             ?>
-            <?php echo $category_meta["subtitle"]; //カテゴリー小見出し出力
+            <?php
+            echo $category_meta["subtitle"]; //カスタムフィールド入力値を表示する。カテゴリー小見出し出力
             ?>
+
         </h2>
 
         <p class="c-section__text">
@@ -44,15 +43,17 @@
             <?php if (have_posts()) : ?> <!--投稿データがあるか調べる-->
                 <?php while (have_posts()) : the_post(); ?> <!--投稿データがあれば、記事の投稿データを１つずつ取得していく処理を行う。//the_post();ループを次の投稿へ進める-->
                     <!--コンテンツ表示処理.表示する内容自体はthe_title()と書けば記事タイトル、the_content()と書けばコンテンツの内容を表示する-->
+
+
                     <li class="p-card">
                         <div class="p-card__body">
                             <?php echo get_post_meta(get_the_ID(), 'cat_field', true); ?>
                             <figure class="p-card__image--container"><?php echo the_post_thumbnail('full', ['class' => 'p-card__image']); ?></figure>
                             <div class="p-card__text--body">
                                 <h3 class="p-card__title c-text--bold c-text--white"><?php the_title(); ?></h3>
-                                <p class="p-card__subtitle c-text--bold c-text--white"><?php echo get_the_excerpt(); ?></p>
+                                <p class="p-card__subtitle c-text--bold c-text--white"><?php echo esc_html(get_the_excerpt()); ?></p>
                                 <p class="p-card__text c-text--white c-font-size--primar">
-                                    <?php $content = get_the_content(); ?>
+                                    <?php $content = esc_html(get_the_content()); ?>
                                     <?php
                                     // HTMLタグの除去
                                     $content = strip_tags($content);
