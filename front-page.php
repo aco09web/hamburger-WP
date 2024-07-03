@@ -1,11 +1,23 @@
 <?php get_header(); ?> <!--header.phpを読み込むテンプレートタグ（インクルードタグ）-->
 <main class="l-main">
     <div class="p-frontHero">
-        <img class="p-frontHero__image" src="<?php the_field("hero-img", 223); //メインビジュアルのカスタム投稿の画像を出力
+        <img class="p-frontHero__image" src="<?php
+                                                // ページスラッグからIDを取得
+                                                //カスタム投稿タイプ（投稿タイプ：parts）
+                                                $post_type = 'parts';
+                                                $data      = get_page_by_path('mainvisual', OBJECT, $post_type);
+                                                $post_id   = $data->ID;
+                                                the_field("hero-img", $post_id); //メインビジュアルのカスタム投稿の画像を出力
                                                 ?>" alt=””>
-        <h1 class=" p-frontHero__title c-text--bold c-text--white"><?php $title = get_the_title(223);
+        <h1 class=" p-frontHero__title c-text--bold c-text--white"><?php //カスタム投稿タイプ（投稿タイプ：parts）
+                                                                    $post_type = 'parts';
+                                                                    $data      = get_page_by_path('mainvisual', OBJECT, $post_type);
+                                                                    $post_id   = $data->ID;
+                                                                    $title = get_the_title($post_id);
                                                                     echo $title; //メインビジュアルのカスタム投稿のタイトルを出力
-                                                                    ?></h1>
+                                                                    ?>
+
+        </h1>
     </div>
     <div class="p-contents">
         <dl class="p-contents__list p-contents__list__takeOut">
@@ -102,12 +114,19 @@
     <div class="p-access">
         <div class="p-access__wrapper">
             <div class="p-access__contents">
-                <h2 class="p-access__title c-text--bold c-text--white"><?php $access_title = get_the_title(232); // カスタム投稿のID
+                <h2 class="p-access__title c-text--bold c-text--white"><?php //カスタム投稿タイプ（投稿タイプ：parts）
+                                                                        $post_type = 'parts';
+                                                                        $data      = get_page_by_path('access', OBJECT, $post_type); //アクセス情報記事のIDを取得
+                                                                        $post_id   = $data->ID;
+                                                                        $access_title = get_the_title($post_id);
                                                                         echo $access_title; ?></h2>
                 <p class="p-access__text c-text--bold c-text--white"><?php
-                                                                        $access_post_id = 232; // カスタム投稿のID
+                                                                        //カスタム投稿タイプ（投稿タイプ：parts）
+                                                                        $post_type = 'parts';
+                                                                        $data      = get_page_by_path('access', OBJECT, $post_type); //アクセス情報記事のIDを取得
+                                                                        $post_id   = $data->ID;
                                                                         // カスタム投稿の本文を取得
-                                                                        $access_post_content = get_post_field('post_content', $access_post_id);
+                                                                        $access_post_content = get_post_field('post_content', $post_id);
                                                                         $access_post_content = wp_strip_all_tags($access_post_content, true); //htmlタグ周り除去
                                                                         echo $access_post_content;
                                                                         ?></p>

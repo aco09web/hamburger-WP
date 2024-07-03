@@ -28,10 +28,6 @@
             //タームのカスタムフィールドを取得するためのIDは「カスタム分類（タクソノミー）名_タームID」
             $term_idsp = $taxonomy . "_" . $term_id;
 
-            //なお、タームではなく、カテゴリの場合は「category_カテゴリID」にする
-            //$cat_id = $category->cat_ID;
-            //$term_idsp = 'category_'.$cat_id;
-
             //カスタムフィールドを取得・出力
             if (get_field('subtitle-takeout-eatin', $term_idsp)) {
                 echo get_field('subtitle-takeout-eatin', $term_idsp);

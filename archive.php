@@ -21,11 +21,6 @@
             $cat_meta = [];
             foreach ($categories as $category) {
                 $category_meta = get_option("category_$category->cat_ID");
-                //タームのカスタムフィールドを取得するためのIDは「カスタム分類（タクソノミー）名_タームID」
-                //なお、タームではなく、カテゴリの場合は「category_カテゴリID」にする
-                //$cat_id = $category->cat_ID;
-                //$term_idsp = 'category_'.$cat_id;
-                //$category_meta = get_option($term_idsp);
             }
             ?>
             <?php
