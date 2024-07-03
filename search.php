@@ -9,27 +9,10 @@
     <section class="c-section--container--primary">
 
         <h2 class="c-section__heading2 c-text--bold">
-            <?php
-            $categories = get_the_category();
-            $cat_meta = [];
-            foreach ($categories as $category) {
-                $category_meta = get_option("category_$category->term_id");
-            }
-            ?>
-            <?php
-            if (isset($category_meta)) {
-                echo $category_meta["subtitle"]; //カテゴリー小見出し出力
-            }
-            ?>
+            <?php echo esc_html(get_search_query()); ?>の検索結果
         </h2>
 
-        <p class="c-section__text">
-            <?php
-            // カテゴリーの説明文を取得
-            if (is_category() && category_description()) {
-                echo category_description();
-            }
-            ?></p>
+
 
 
 
@@ -40,18 +23,28 @@
                     <li class="p-card">
                         <div class="p-card__body">
                             <?php echo get_post_meta(get_the_ID(), 'cat_field', true); ?>
-                            <figure class="p-card__image--container"><?php echo the_post_thumbnail('full', ['class' => 'p-card__image']); ?></figure>
+                            <figure class="p-card__image--container"><?php if (has_post_thumbnail()) : /* もしアイキャッチが登録されていたら */ ?>
+                                    <?php echo the_post_thumbnail('full', ['class' => 'p-card__image']); ?>
+                                <?php else : /* 登録されていなかったら */ ?>
+                                    <img class="p-card__image" src="<?php echo get_template_directory_uri(); ?>/images/article_01.webp" alt="hamburger">
+                                <?php endif; ?>
+                            </figure>
                             <div class="p-card__text--body">
-                                <h3 class="p-card__title c-text--bold c-text--white"><?php the_title(); ?></h3>
-                                <p class="p-card__subtitle c-text--bold c-text--white"><?php echo get_the_excerpt(); ?></p>
+                                <h3 class="p-card__title c-text--bold c-text--white"><?php esc_html(the_title()); ?></h3>
+                                <p class="p-card__subtitle c-text--bold c-text--white"><?php
+                                                                                        $excerpt = esc_html(get_the_excerpt());
+                                                                                        if (has_excerpt()) : //抜粋があるかどうか
+                                                                                        ?>
+                                        <?php echo $excerpt; ?>
+                                    <?php endif; ?></p>
                                 <p class="p-card__text c-text--white c-font-size--primar">
-                                    <?php $content = get_the_content(); ?>
+                                    <?php $content = esc_html(get_the_content()); ?>
                                     <?php
                                     // HTMLタグの除去
                                     $content = strip_tags($content);
                                     // ショートコードの除去
                                     $content = strip_shortcodes($content);
-                                    echo $content; ?></p>
+                                    echo wp_trim_words(get_the_content(), 100, '...'); ?></p>
                                 <div class="p-card__link--container"><a href="<?php the_permalink(); ?>" class="p-card__link c-text--bold c-bg-color--white c-text--gray--primary">詳しく見る</a></div>
                             </div>
                         </div>

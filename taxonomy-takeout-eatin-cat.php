@@ -6,6 +6,7 @@
             <span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary">
 
                 <?php single_cat_title(); ?>
+
             </span>
         </h1>
 
@@ -17,32 +18,39 @@
     <section class="c-section--container--primary">
         <h2 class="c-section__heading2 c-text--bold">
             <?php
-            $categories = get_the_category();
-            $cat_meta = [];
-            foreach ($categories as $category) {
-                $category_meta = get_option("category_$category->cat_ID");
-                //タームのカスタムフィールドを取得するためのIDは「カスタム分類（タクソノミー）名_タームID」
-                //なお、タームではなく、カテゴリの場合は「category_カテゴリID」にする
-                //$cat_id = $category->cat_ID;
-                //$term_idsp = 'category_'.$cat_id;
-                //$category_meta = get_option($term_idsp);
+            // カスタム分類名
+            $taxonomy = 'takeout-eatin-cat';
+            $term_slug = get_query_var('term'); //カスタムタクソノミーの情報を取得
+
+            $the_term = get_term_by('slug', $term_slug, $taxonomy);
+            $term_id = $the_term->term_id; //タクソノミーのIDを取得
+
+            //タームのカスタムフィールドを取得するためのIDは「カスタム分類（タクソノミー）名_タームID」
+            $term_idsp = $taxonomy . "_" . $term_id;
+
+            //なお、タームではなく、カテゴリの場合は「category_カテゴリID」にする
+            //$cat_id = $category->cat_ID;
+            //$term_idsp = 'category_'.$cat_id;
+
+            //カスタムフィールドを取得・出力
+            if (get_field('subtitle-takeout-eatin', $term_idsp)) {
+                echo get_field('subtitle-takeout-eatin', $term_idsp);
             }
             ?>
-            <?php
-            echo $category_meta["subtitle"]; //カスタムフィールド入力値を表示する。カテゴリー小見出し出力
-            ?>
-
         </h2>
 
         <p class="c-section__text">
-            <?php
-            // カテゴリーの説明文を取得
-            if (is_category() && category_description()) {
-                echo category_description();
-            }
-            ?>
 
+
+            <?php //カスタムタクソノミーの説明文を取得。
+            if (is_tax('takeout-eatin-cat', 'take-out-cat')) : ?>
+                <?php
+                echo term_description('21', 'take-out-cat') ?>
+            <?php elseif (is_tax('takeout-eatin-cat', 'eat-in-cat')) : ?>
+                <?php echo term_description('22', 'take-out-cat') ?>
+            <?php endif; ?>
         </p>
+
 
 
 
@@ -55,20 +63,15 @@
                     <li class="p-card">
                         <div class="p-card__body">
                             <?php echo get_post_meta(get_the_ID(), 'cat_field', true); ?>
-                            <figure class="p-card__image--container">
-                                <?php if (has_post_thumbnail()) : /* もしアイキャッチが登録されていたら */ ?>
+                            <figure class="p-card__image--container"><?php if (has_post_thumbnail()) : /* もしアイキャッチが登録されていたら */ ?>
                                     <?php echo the_post_thumbnail('full', ['class' => 'p-card__image']); ?>
                                 <?php else : /* 登録されていなかったら */ ?>
                                     <img class="p-card__image" src="<?php echo get_template_directory_uri(); ?>/images/article_01.webp" alt="hamburger">
                                 <?php endif; ?>
                             </figure>
                             <div class="p-card__text--body">
-                                <h3 class="p-card__title c-text--bold c-text--white"><?php esc_html(the_title()); ?></h3>
-                                <p class="p-card__subtitle c-text--bold c-text--white"><?php
-                                                                                        $excerpt = esc_html(get_the_excerpt());
-                                                                                        if (has_excerpt()) : ?>
-                                        <?php echo $excerpt; ?>
-                                    <?php endif; ?></p>
+                                <h3 class="p-card__title c-text--bold c-text--white"><?php the_title(); ?></h3>
+                                <p class="p-card__subtitle c-text--bold c-text--white"><?php echo esc_html(get_the_excerpt()); ?></p>
                                 <p class="p-card__text c-text--white c-font-size--primar">
                                     <?php $content = esc_html(get_the_content()); ?>
                                     <?php
@@ -101,40 +104,13 @@
         ));
     endif; ?>
 
-    <!--<article class="p-card">
-        <div class="p-card__body">
-            <figure class="p-card__image--container"><img class="p-card__image" src="./images/article_01.webp" alt="hamburger"></figure>
-            <div class="p-card__text--body">
-                <h3 class="p-card__title c-text--bold c-text--white">チーズバーガー</h3>
-                <p class="p-card__subtitle c-text--bold c-text--white">小見出しが入ります</p>
-                <p class="p-card__text c-text--white c-font-size--primar">テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
-                <div class="p-card__link--container"><a href="#" class="p-card__link c-text--bold c-bg-color--white c-text--gray--primary">詳しく見る</a></div>
-            </div>
-        </div>
-    </article>-->
+
 
     </section>
 
 
 
-    <!--<div class="p-pagination--pc c-text--gray--primary c-font--title">
-        <p class="p-pagination__text c-text--bold">page 1/10</p>
-        <ul class="p-pagination__list">
-            <li><a class="p-pagination__list__link p-pagination__link--current c-text--bold p-pagination__arrow-prev u-mg-left0" href="#">1</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">2</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">3</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">4</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">5</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">6</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">7</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">8</a></li>
-            <li><a class="p-pagination__list__link c-text--bold p-pagination__arrow-next" href="#">9</a></li>
-        </ul>
-    </div>
-    <div class="p-pagination--sp c-font-size--primary">
-        <a class="p-pagination__prev" href="#">前へ</a>
-        <a class="p-pagination__next" href="#">次へ</a>
-    </div>-->
+
 </main>
 </div>
 <?php get_sidebar(); ?>

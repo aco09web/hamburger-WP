@@ -3,14 +3,14 @@
 
     <section class="p-single--Hero">
         <h1 class="p-single__title c-text--bold c-text--white"><?php the_title(); ?></h1>
-        <figure><?php if (has_post_thumbnail()) { /* アイキャッチ画像が設定されているかの判定 */
-                    the_post_thumbnail( /* アイキャッチ画像をimgタグで表示 */
-                        'full', /* 任意の画像サイズ */
-                        array(
-                            'class' => 'p-single__image', /* 任意のクラス名 */
-                        )
-                    );
-                } ?></figure>
+        <figure>
+            <?php if (has_post_thumbnail()) : /* もしアイキャッチが登録されていたら */ ?>
+                <?php echo the_post_thumbnail('full', ['class' => 'p-single__image']); ?>
+            <?php else : /* 登録されていなかったら */ ?>
+                <img class="p-single__image" src="<?php echo get_template_directory_uri(); ?>/images/article_01.webp" alt="hamburger">
+            <?php endif; ?>
+
+        </figure>
     </section>
     <section class="c-section--container--secondary">
         <div class="editor-styles-wrapper">

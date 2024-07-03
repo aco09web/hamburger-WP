@@ -78,9 +78,12 @@
     display: flex;
     justify-content: space-between;
     margin: 0 54px;
+    position: relative;
+    min-height: 32px;
     @include g.breakpoint(pc){
         margin: 0 54px 0 0;
-        position: relative;
+        min-height: auto;
+
     }
 }
 .p-pagination__list__link{
@@ -129,9 +132,12 @@
     }
 }
 .p-pagination__arrow-next{
-    position: relative;
+    right: 0;
+    top: 0;
+    position: absolute;
     line-height: 2.1;
     @include g.breakpoint(pc){
+        position: relative;
         font-size: 0;
         line-height: 1.7;
     };

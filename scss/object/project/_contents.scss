@@ -1,34 +1,6 @@
 @use "../../foundation/global" as g;
 
-.p-frontHero{
-    background: url(../images/hero-sp_01.webp) no-repeat center center / cover;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    height: 285px;
-    @include g.breakpoint(tablet){
-        background: url(../images/hero-tablet_01.webp) no-repeat center center / cover;
-        margin-bottom: 40px;
-    }
-    @include g.breakpoint(pc){
-        background: url(../images/hero_01.webp) no-repeat center center / auto 100%;
-        margin-bottom: 6.25vw;
-        height: 27.604vw;
-    }
-}
-.p-frontHero__title{
-    padding: 0 25px;
-    font-size: 3.6rem;
-    line-height: 1.485;
-    font-weight: 700;
-    @include g.breakpoint(tablet){
-        padding: 0 0 0 86px;
-    }
-    @include g.breakpoint(pc){
-        padding: 0 4.479vw;
-        font-size: 2.083vw;
-    }
-}
+
 .p-contents{
     margin: 0 20px;
     @include g.breakpoint(tablet){
