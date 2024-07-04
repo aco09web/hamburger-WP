@@ -10,7 +10,7 @@
             </span>
         </h1>
 
-        <figure><img class="p-archive__image" src="<?php echo get_template_directory_uri(); ?>/images/archive-top-pc.webp" alt=”hamburger”></figure>
+        <figure><img class="p-archive__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/archive-top-pc.webp" alt=”hamburger”></figure>
     </section>
 
 
@@ -62,7 +62,7 @@
                             <figure class="p-card__image--container"><?php if (has_post_thumbnail()) : /* もしアイキャッチが登録されていたら */ ?>
                                     <?php echo the_post_thumbnail('full', ['class' => 'p-card__image']); ?>
                                 <?php else : /* 登録されていなかったら */ ?>
-                                    <img class="p-card__image" src="<?php echo get_template_directory_uri(); ?>/images/article_01.webp" alt="hamburger">
+                                    <img class="p-card__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/article_01.webp" alt="hamburger">
                                 <?php endif; ?>
                             </figure>
                             <div class="p-card__text--body">

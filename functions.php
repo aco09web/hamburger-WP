@@ -5,6 +5,8 @@ add_theme_support('title-tag');
 add_theme_support('post-thumbnails');
 //エディタスタイルを利用できるようにする
 add_theme_support('editor-styles');
+//WordPressでフィードを利用できるようにする
+add_theme_support('automatic-feed-links');
 
 //タイトル出力
 function hamburger_title($title)

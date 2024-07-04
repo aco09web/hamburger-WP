@@ -1,21 +1,39 @@
 <?php get_header(); ?> <!--header.phpを読み込むテンプレートタグ（インクルードタグ）-->
 <main class="l-main">
+
     <div class="p-frontHero">
-        <img class="p-frontHero__image" src="<?php
-                                                // ページスラッグからIDを取得
-                                                //カスタム投稿タイプ（投稿タイプ：parts）
-                                                $post_type = 'parts';
-                                                $data      = get_page_by_path('mainvisual', OBJECT, $post_type);
-                                                $post_id   = $data->ID;
-                                                the_field("hero-img", $post_id); //メインビジュアルのカスタム投稿の画像を出力
-                                                ?>" alt=””>
-        <h1 class=" p-frontHero__title c-text--bold c-text--white"><?php //カスタム投稿タイプ（投稿タイプ：parts）
-                                                                    $post_type = 'parts';
-                                                                    $data      = get_page_by_path('mainvisual', OBJECT, $post_type);
-                                                                    $post_id   = $data->ID;
-                                                                    $title = get_the_title($post_id);
-                                                                    echo $title; //メインビジュアルのカスタム投稿のタイトルを出力
-                                                                    ?>
+        <?php if (get_field('hero-img')) : // 画像がカスタムフィールドにある場合
+        ?>
+            <img class="p-frontHero__image" src="<?php
+                                                    // ページスラッグからIDを取得
+                                                    //カスタム投稿タイプ（投稿タイプ：parts）
+                                                    $post_type = 'parts';
+                                                    $data      = get_page_by_path('mainvisual', OBJECT, $post_type);
+                                                    $post_id   = $data->ID;
+                                                    the_field("hero-img", $post_id); //メインビジュアルのカスタム投稿の画像を出力
+                                                    ?>" alt=””>
+        <?php else : // 画像がカスタムフィールドにない場合
+        ?>
+            <img class="p-frontHero__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/hero_01.webp" alt=”hamburger”>
+        <?php endif; ?>
+        <h1 class=" p-frontHero__title c-text--bold c-text--white">
+            <?php
+            $post_type = 'parts';
+            $data      = get_page_by_path('mainvisual', OBJECT, $post_type); //メインビジュアルのカスタム投稿のタイトルを取得
+            $post_tit   = $data->post_title;
+            if (empty($post_tit)) : ?>
+                <!-- タイトルが空（未入力）の場合の処理 -->
+                <?php echo 'タイトルの入力がありません。' . "\n" ?>
+            <?php else : ?>
+                <!-- タイトルが空（未入力）ではない場合の処理 -->
+                <?php //カスタム投稿タイプ（投稿タイプ：parts）
+                $post_type = 'parts';
+                $data      = get_page_by_path('mainvisual', OBJECT, $post_type);
+                $post_id   = $data->ID;
+                $title = get_the_title($post_id);
+                echo $title; //メインビジュアルのカスタム投稿のタイトルを出力
+                ?>
+            <?php endif; ?>
 
         </h1>
     </div>

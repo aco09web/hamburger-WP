@@ -9,7 +9,7 @@
             </span>
         </h1>
 
-        <figure><img class="p-archive__image" src="<?php echo get_template_directory_uri(); ?>/images/archive-top-pc.webp" alt=”hamburger”></figure>
+        <figure><img class="p-archive__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/archive-top-pc.webp" alt=”hamburger”></figure>
     </section>
 
 
@@ -47,14 +47,14 @@
                     <!--コンテンツ表示処理.表示する内容自体はthe_title()と書けば記事タイトル、the_content()と書けばコンテンツの内容を表示する-->
 
 
-                    <li class="p-card">
+                    <li id="post-<?php the_ID(); ?>" <?php post_class('p-card'); ?>>
                         <div class="p-card__body">
                             <?php echo get_post_meta(get_the_ID(), 'cat_field', true); ?>
                             <figure class="p-card__image--container">
                                 <?php if (has_post_thumbnail()) : /* もしアイキャッチが登録されていたら */ ?>
                                     <?php echo the_post_thumbnail('full', ['class' => 'p-card__image']); ?>
                                 <?php else : /* 登録されていなかったら */ ?>
-                                    <img class="p-card__image" src="<?php echo get_template_directory_uri(); ?>/images/article_01.webp" alt="hamburger">
+                                    <img class="p-card__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/article_01.webp" alt="hamburger">
                                 <?php endif; ?>
                             </figure>
                             <div class="p-card__text--body">
@@ -96,40 +96,8 @@
         ));
     endif; ?>
 
-    <!--<article class="p-card">
-        <div class="p-card__body">
-            <figure class="p-card__image--container"><img class="p-card__image" src="./images/article_01.webp" alt="hamburger"></figure>
-            <div class="p-card__text--body">
-                <h3 class="p-card__title c-text--bold c-text--white">チーズバーガー</h3>
-                <p class="p-card__subtitle c-text--bold c-text--white">小見出しが入ります</p>
-                <p class="p-card__text c-text--white c-font-size--primar">テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
-                <div class="p-card__link--container"><a href="#" class="p-card__link c-text--bold c-bg-color--white c-text--gray--primary">詳しく見る</a></div>
-            </div>
-        </div>
-    </article>-->
-
     </section>
 
-
-
-    <!--<div class="p-pagination--pc c-text--gray--primary c-font--title">
-        <p class="p-pagination__text c-text--bold">page 1/10</p>
-        <ul class="p-pagination__list">
-            <li><a class="p-pagination__list__link p-pagination__link--current c-text--bold p-pagination__arrow-prev u-mg-left0" href="#">1</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">2</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">3</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">4</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">5</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">6</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">7</a></li>
-            <li><a class="p-pagination__list__link c-text--bold" href="#">8</a></li>
-            <li><a class="p-pagination__list__link c-text--bold p-pagination__arrow-next" href="#">9</a></li>
-        </ul>
-    </div>
-    <div class="p-pagination--sp c-font-size--primary">
-        <a class="p-pagination__prev" href="#">前へ</a>
-        <a class="p-pagination__next" href="#">次へ</a>
-    </div>-->
 </main>
 </div>
 <?php get_sidebar(); ?>

@@ -1,93 +1,135 @@
 <?php get_header(); ?> <!--header.phpを読み込むテンプレートタグ（インクルードタグ）-->
 <main class="l-main">
     <div class="p-frontHero">
-        <h1 class="p-frontHero__title c-text--bold c-text--white">ダミーサイト</h1>
+        <img class="p-frontHero__image" src="<?php
+                                                // ページスラッグからIDを取得
+                                                //カスタム投稿タイプ（投稿タイプ：parts）
+                                                $post_type = 'parts';
+                                                $data      = get_page_by_path('mainvisual', OBJECT, $post_type);
+                                                $post_id   = $data->ID;
+                                                the_field("hero-img", $post_id); //メインビジュアルのカスタム投稿の画像を出力
+                                                ?>" alt=””>
+        <h1 class=" p-frontHero__title c-text--bold c-text--white"><?php //カスタム投稿タイプ（投稿タイプ：parts）
+                                                                    $post_type = 'parts';
+                                                                    $data      = get_page_by_path('mainvisual', OBJECT, $post_type);
+                                                                    $post_id   = $data->ID;
+                                                                    $title = get_the_title($post_id);
+                                                                    echo $title; //メインビジュアルのカスタム投稿のタイトルを出力
+                                                                    ?>
+
+        </h1>
     </div>
     <div class="p-contents">
         <dl class="p-contents__list p-contents__list__takeOut">
             <dt class="p-contents__title c-text--gray--secondary c-text--bold c-font--title">Take Out</dt>
-            <div>
-                <dd class="p-contents__text">
-                    <?php
-                    $args = array(
-                        'post_type' => 'takeout', //カスタム投稿タイプ名
-                        'posts_per_page' => 2, //取得する投稿の件数
-                    );
-                    $the_query = new WP_Query($args);
-                    ?>
-                    <?php if ($the_query->have_posts()) : // 投稿がある場合 
-                    ?>
-                        <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-                            <!-- ここに投稿がある場合の記述 -->
-                            <p class="p-contents__subTitle c-text--bold"><?php the_title(); ?></p>
-                            <p class="p-contents__subText"><?php
-                                                            // HTMLタグの除去
-                                                            $content = strip_tags($content);
-                                                            // ショートコードの除去
-                                                            $content = strip_shortcodes($content);
-                                                            echo $content(); ?></p>
-                        <?php endwhile; ?>
-                    <?php else : ?>
-                        <!-- ここに投稿がない場合の記述 -->
-                    <?php endif;
-                    wp_reset_postdata(); ?>
 
+            <?php
+            $takeout_args = [
+                'post_type' => 'takeout', // カスタム投稿名が「takeout」の場合
+                'posts_per_page' => 2, // 表示する数
+            ];
+            $takeout_posts = get_posts($takeout_args); ?>
 
-                    <?php
-                    $event_args = [
-                        'post_type' => 'takeout', // カスタム投稿名が「event」の場合
-                        'posts_per_page' => 5, // 表示する数
-                    ];
-                    $event_posts = get_posts($event_args); ?>
+            <?php if ($takeout_posts) : foreach ($takeout_posts as $post) : setup_postdata($post); // 投稿がある場合 
+            ?>
 
-                    <?php if ($event_posts) : foreach ($event_posts as $post) : setup_postdata($post); // 投稿がある場合 
-                    ?>
+                    <!-- ▽ ループ開始 ▽ -->
 
-                            <!-- ▽ ループ開始 ▽ -->
+                    <dd class="p-contents__text">
+                        <a href='<?php echo esc_url(get_term_link('take-out-cat', 'takeout-eatin-cat')); ?>'>
 
-                            <li>
-                                <p><?php the_time('Y年 n月'); ?></p>
-                                <h3><?php the_title(); ?></h3>
-                                <?php the_content(); ?>
-                            </li>
+                            <p class="p-contents__subTitle c-text--bold c-font--title"><?php the_title(); ?></p>
+                            <p class="p-contents__subText"><?php if (isset($content)) $content = esc_html(get_the_content()); ?>
+                                <?php
+                                if (isset($content)) {
+                                    // HTMLタグの除去
+                                    $content = strip_tags($content);
+                                    echo $content();
+                                } ?>
+                                <?php the_content(); ?></p>
+                        </a>
 
-                            <!-- △ ループ終了 △ -->
+                    </dd>
 
-                        <?php endforeach; ?>
+                    <!-- △ ループ終了 △ -->
 
-                    <?php else : // 記事がない場合 
-                    ?>
+                <?php endforeach; ?>
 
-                        <li>まだ投稿がありません。</li>
+            <?php else : // 記事がない場合 
+            ?>
 
-                    <?php endif;
-                    wp_reset_postdata(); ?>
-                </dd>
-                <dd class="p-contents__text">
-                    <p class="p-contents__subTitle c-text--bold c-font--title">Take OUT</p>
-                    <p class="p-contents__subText">当店のテイクアウトで利用できる商品を掲載しています当店のテイクアウトで利用できる商品を掲載しています当店のテイクアウトで利用できる商品を掲載しています当店のテイクアウトで利用できる商品を掲載しています当店のテイクアウトで利用できる商品を掲載しています当店のテイクアウトで</p>
-                </dd>
-            </div>
+                <li>まだ投稿がありません。</li>
+
+            <?php endif;
+            wp_reset_postdata(); ?>
         </dl>
         <dl class="p-contents__list p-contents__list__eatIn">
             <dt class="p-contents__title c-text--white c-text--bold">Eat In</dt>
-            <div>
-                <dd class="p-contents__text">
-                    <p class="p-contents__subTitle c-text--bold">Eat In</p>
-                    <p class="p-contents__subText">店内でお食事いただけるメニューです店内でお食事いただけるメニューです店内でお食事いただけるメニューです店内でお食事いただけるメニューです店内でお食事いただけるメニューです店内でお食事いただけるメニューです店内でお食事いただけるメニューです店内でお食事いただけるメニューです</p>
-                </dd>
-                <dd class="p-contents__text">
-                    <p class="p-contents__subTitle c-text--bold">Eat In</p>
-                    <p class="p-contents__subText">店内でお食事いただけるメニューです店内でお食事いただけるメニューです店内でお食事いただけるメニューです店内でお食事いただけるメニューです店内でお食事いただけるメニューです店内でお食事いただけるメニューです店内でお食事いただけるメニューです店内でお食事いただけるメニューです</p>
-                </dd>
-            </div>
+
+            <?php
+            $takeout_args = [
+                'post_type' => 'eatin', // カスタム投稿名が「eatin」の場合
+                'posts_per_page' => 2, // 表示する数
+            ];
+            $takeout_posts = get_posts($takeout_args); ?>
+
+            <?php if ($takeout_posts) : foreach ($takeout_posts as $post) : setup_postdata($post); // 投稿がある場合 
+            ?>
+
+                    <!-- ▽ ループ開始 ▽ -->
+
+                    <dd class="p-contents__text">
+
+                        <a href='<?php echo esc_url(get_term_link('eat-in-cat', 'takeout-eatin-cat')); ?>'>
+
+                            <p class="p-contents__subTitle c-text--bold c-font--title"><?php the_title(); ?></p>
+                            <p class="p-contents__subText"><?php if (isset($content)) $content = esc_html(get_the_content()); ?>
+                                <?php
+                                if (isset($content)) {
+                                    // HTMLタグの除去
+                                    $content = strip_tags($content);
+                                    echo $content();
+                                } ?>
+                                <?php the_content(); ?></p>
+                        </a>
+
+                    </dd>
+
+                    <!-- △ ループ終了 △ -->
+
+                <?php endforeach; ?>
+
+            <?php else : // 記事がない場合 
+            ?>
+
+                <li>まだ投稿がありません。</li>
+
+            <?php endif;
+            wp_reset_postdata(); ?>
+
         </dl>
     </div>
+    </dl>
+
     <div class="p-access">
         <div class="p-access__wrapper">
             <div class="p-access__contents">
-                <h2 class="p-access__title c-text--bold c-text--white">見出しが入ります</h2>
-                <p class="p-access__text c-text--bold c-text--white">テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。</p>
+                <h2 class="p-access__title c-text--bold c-text--white"><?php //カスタム投稿タイプ（投稿タイプ：parts）
+                                                                        $post_type = 'parts';
+                                                                        $data      = get_page_by_path('access', OBJECT, $post_type); //アクセス情報記事のIDを取得
+                                                                        $post_id   = $data->ID;
+                                                                        $access_title = get_the_title($post_id);
+                                                                        echo $access_title; ?></h2>
+                <p class="p-access__text c-text--bold c-text--white"><?php
+                                                                        //カスタム投稿タイプ（投稿タイプ：parts）
+                                                                        $post_type = 'parts';
+                                                                        $data      = get_page_by_path('access', OBJECT, $post_type); //アクセス情報記事のIDを取得
+                                                                        $post_id   = $data->ID;
+                                                                        // カスタム投稿の本文を取得
+                                                                        $access_post_content = get_post_field('post_content', $post_id);
+                                                                        $access_post_content = wp_strip_all_tags($access_post_content, true); //htmlタグ周り除去
+                                                                        echo $access_post_content;
+                                                                        ?></p>
             </div>
         </div>
     </div>
