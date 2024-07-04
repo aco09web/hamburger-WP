@@ -1,4 +1,4 @@
-<?php get_header(); ?> <!--header.phpを読み込むテンプレートタグ（インクルードタグ）-->
+<?php get_header(); ?>
 <main class="l-main">
     <section class="p-archive--Hero c-bg-color--black">
         <h1 class="p-archive__title c-text--bold c-text--white c-font--title">Search:<span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary"><?php echo esc_html(get_search_query()); ?></span></h1>
@@ -17,15 +17,18 @@
 
 
         <ul>
-            <?php if (have_posts()) : ?> <!--投稿データがあるか調べる-->
-                <?php while (have_posts()) : the_post(); ?> <!--投稿データがあれば、記事の投稿データを１つずつ取得していく処理を行う。//the_post();ループを次の投稿へ進める-->
-                    <!--コンテンツ表示処理.表示する内容自体はthe_title()と書けば記事タイトル、the_content()と書けばコンテンツの内容を表示する-->
+            <?php if (have_posts()) : //投稿データがあるか調べる
+            ?>
+                <?php while (have_posts()) : the_post(); //投稿データがあれば、記事の投稿データを１つずつ取得していく処理を行う。//the_post();ループを次の投稿へ進める
+                ?>
                     <li class="p-card">
                         <div class="p-card__body">
                             <?php echo get_post_meta(get_the_ID(), 'cat_field', true); ?>
-                            <figure class="p-card__image--container"><?php if (has_post_thumbnail()) : /* もしアイキャッチが登録されていたら */ ?>
+                            <figure class="p-card__image--container"><?php if (has_post_thumbnail()) : //もしアイキャッチが登録されていたら 
+                                                                        ?>
                                     <?php echo the_post_thumbnail('full', ['class' => 'p-card__image']); ?>
-                                <?php else : /* 登録されていなかったら */ ?>
+                                <?php else : //登録されていなかったら 
+                                ?>
                                     <img class="p-card__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/article_01.webp" alt="hamburger">
                                 <?php endif; ?>
                             </figure>
@@ -49,12 +52,12 @@
                             </div>
                         </div>
                     </li>
-                <?php endwhile; ?>
+                <?php endwhile; //投稿内容の繰り返し処理が終わって一度のみ何かをしたいときはココに書く
+                ?>
         </ul>
-        <!--投稿内容の繰り返し処理が終わって一度のみ何かをしたいときはココに書く-->
-    <?php else : ?>
+    <?php else : //投稿データがない場合の処理「投稿記事がありません」とフロントで表示させる
+    ?>
         <p>検索したキーワードに合致するデータがありません</p>
-        <!--//投稿データがない場合の処理「投稿記事がありません」とフロントで表示させる-->
     <?php endif; ?>
 
     <?php if (function_exists('wp_pagenavi')) :
@@ -79,4 +82,4 @@
 <?php get_sidebar(); ?>
 <div class="p-nav__bg-color c-bg-color--black"></div>
 </div>
-<?php get_footer(); ?> <!--footer.phpを読み込むテンプレートタグ（インクルードタグ）-->
+<?php get_footer(); ?>

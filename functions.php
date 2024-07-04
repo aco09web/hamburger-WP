@@ -393,3 +393,29 @@ add_filter('posts_search', 'custom_search', 10, 2);
 
 //固定ページで抜粋を使えるようにする
 add_post_type_support('page', 'excerpt');
+
+
+//Advanced custom fieldプラグインの使用判定
+
+function blvacf_judgment()
+{
+    include_once(ABSPATH . 'wp-admin/includes/plugin.php'); //plugin.phpを読み込む
+    if (is_plugin_active('advanced-custom-fields/acf.php')) {
+        //プラグインが有効の場合
+        return true;
+    } else {
+        //プラグインが無効の場合
+        return false;
+    }
+};
+
+function is_active_acf()
+{
+    include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+
+    if (is_plugin_active('advanced-custom-fields/acf.php')) {
+        return true;
+    } else {
+        return false;
+    }
+}
