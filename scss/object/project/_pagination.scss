@@ -83,7 +83,16 @@
     @include g.breakpoint(pc){
         margin: 0 54px 0 0;
         min-height: auto;
-
+    }
+}
+.p-pagination__list--secondary{
+    display: flex;
+    justify-content: space-between;
+    margin: 100px 54px;
+    position: relative;
+    min-height: 32px;
+    @include g.breakpoint(pc){
+        min-height: auto;
     }
 }
 .p-pagination__list__link{
@@ -131,6 +140,37 @@
         left: -33px;
     }
 }
+.p-pagination__arrow-prev-secondary{
+    position: relative;
+    line-height: 2.1;
+    @include g.breakpoint(pc){
+        line-height: 1.7;
+    }
+    &::before{
+        content: "";
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        border-top: 1px solid g.$color--gray;
+        border-right: 1px solid g.$color--gray;
+        transform: rotate(-135deg);
+        position: absolute;
+        top: 3px;
+        left: -24px;
+    }
+    &::after{
+        content: "";
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        border-top: 1px solid g.$color--gray;
+        border-right: 1px solid g.$color--gray;
+        transform: rotate(-135deg);
+        position: absolute;
+        top: 3px;
+        left: -33px;
+    }
+}
 .p-pagination__arrow-next{
     right: 0;
     top: 0;
@@ -164,6 +204,46 @@
         position: absolute;
         top: 10px;
         right: -33px;
+    }
+}
+.p-pagination__arrow-next-secondary{
+    right: 0;
+    top: 0;
+    position: absolute;
+    line-height: 2.1;
+    @include g.breakpoint(pc){
+        position: relative;
+        line-height: 1.7;
+    };
+    &::before{
+        content: "";
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        border-top: 1px solid g.$color--gray;
+        border-right: 1px solid g.$color--gray;
+        transform: rotate(45deg);
+        position: absolute;
+        top: 10px;
+        right: -24px;
+        @include g.breakpoint(pc){
+            top: 3px;
+        }
+    }
+    &::after{
+        content: "";
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        border-top: 1px solid g.$color--gray;
+        border-right: 1px solid g.$color--gray;
+        transform: rotate(45deg);
+        position: absolute;
+        top: 10px;
+        right: -33px;
+            @include g.breakpoint(pc){
+            top: 3px;
+        }
     }
 }
 .pagination__text{

@@ -189,9 +189,19 @@ function wp_pagenavi_class_current_func($class_name)
 add_filter('wp_pagenavi_class_current', 'wp_pagenavi_class_current_func');
 
 
+//デフォルトのページャーの前の記事・次の記事のリンクにclassを付与する
 
+add_filter('previous_posts_link_attributes', 'add_prev_post_link_class');
+function add_prev_post_link_class()
+{
+    return 'class="p-pagination__arrow-prev-secondary"';
+}
 
-
+add_filter('next_posts_link_attributes', 'add_next_post_link_class');
+function add_next_post_link_class()
+{
+    return 'class="p-pagination__arrow-next-secondary"';
+}
 
 //エディターとサイトのフロントの両方でeditor-style.cssを読み込ませる
 function hamburger_enqueue_styles()
@@ -287,12 +297,27 @@ function create_post_type()
         )
     );
     register_post_type(
-        'parts',
+        'mainvisual',
         array(
-            'label' => 'メインビジュアルとアクセス',
+            'label' => 'メインビジュアル',
             'public' => true,
             'show_in_rest' => true,
             'menu_position' => 7,
+            'supports' => array(
+                'title',
+                'editor',
+                'revisions',
+                'custom-fields',
+            ),
+        )
+    );
+    register_post_type(
+        'access',
+        array(
+            'label' => 'アクセス',
+            'public' => true,
+            'show_in_rest' => true,
+            'menu_position' => 8,
             'supports' => array(
                 'title',
                 'editor',
@@ -306,7 +331,7 @@ add_action('init', 'create_post_type');
 
 
 /**
- * カスタム投稿の記事知覧で並び順を日付降順に変更
+ * カスタム投稿の記事一覧で並び順を日付降順に変更
  */
 
 function change_post_types_admin_order($wp_query)
@@ -396,24 +421,23 @@ add_post_type_support('page', 'excerpt');
 
 
 //Advanced custom fieldプラグインの使用判定
-
-function blvacf_judgment()
-{
-    include_once(ABSPATH . 'wp-admin/includes/plugin.php'); //plugin.phpを読み込む
-    if (is_plugin_active('advanced-custom-fields/acf.php')) {
-        //プラグインが有効の場合
-        return true;
-    } else {
-        //プラグインが無効の場合
-        return false;
-    }
-};
-
 function is_active_acf()
 {
     include_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
     if (is_plugin_active('advanced-custom-fields/acf.php')) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//WP-PageNaviプラグインの使用判定
+function is_active_wp_pagenavi()
+{
+    include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+
+    if (is_plugin_active('wp-pagenavi/wp-pagenavi.php')) {
         return true;
     } else {
         return false;

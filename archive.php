@@ -80,22 +80,43 @@
                 <?php endwhile; //投稿内容の繰り返し処理が終わって一度のみ何かをしたいときはココに書く
                 ?>
         </ul>
+
     <?php else : //投稿データがない場合の処理
     ?>
         <p>投稿データがありません</p>
     <?php endif; ?>
-    <?php if (function_exists('wp_pagenavi')) :
-        wp_pagenavi(array(
-            'before' => '<div class="p-pagination c-text--gray--primary c-font--title">',
-            'after' => '</div>',
-            'wrapper_tag' => 'ul',
-            'wrapper_class' => 'p-pagination__list',
-            //'options' => array( // 管理画面で設定したオプションの上書き
-            //'prev_text' => " ",
-            //'next_text' => " "
-            //)
-        ));
-    endif; ?>
+
+
+    <?php if (is_active_wp_pagenavi()) : //WP-PageNaviプラグインが有効になっている場合 
+    ?>
+        <?php if (function_exists('wp_pagenavi')) :
+            wp_pagenavi(array(
+                'before' => '<div class="p-pagination c-text--gray--primary c-font--title">',
+                'after' => '</div>',
+                'wrapper_tag' => 'ul',
+                'wrapper_class' => 'p-pagination__list',
+                //'options' => array( // 管理画面で設定したオプションの上書き
+                //'prev_text' => " ",
+                //'next_text' => " "
+                //)
+            )); ?>
+        <?php else : ?>
+        <?php endif; ?>
+    <?php else : //WP-PageNaviプラグインが有効になっていない場合 
+    ?>
+        <?php if ($wp_query->max_num_pages > 1) : //ページ数が1を超える場合に処理 
+        ?>
+            <div class="c-text--gray--primary c-font--title">
+                <ul class="p-pagination__list--secondary u-mg-bottom--primary">
+                    <li><?php previous_posts_link('前へ'); ?></li>
+                    <li><?php next_posts_link('次へ'); ?></li>
+                </ul>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+
+
+
 
     </section>
 

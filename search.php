@@ -60,8 +60,8 @@
         <p>検索したキーワードに合致するデータがありません</p>
     <?php endif; ?>
 
-    <?php if (function_exists('wp_pagenavi')) :
-        wp_pagenavi(array(
+    <?php if (function_exists('wp_pagenavi')) : ?>
+        <?php wp_pagenavi(array(
             'before' => '<div class="p-pagination c-text--gray--primary c-font--title">',
             'after' => '</div>',
             'wrapper_tag' => 'ul',
@@ -70,8 +70,8 @@
             //'prev_text' => " ",
             //'next_text' => " "
             //)
-        ));
-    endif; ?>
+        )); ?>
+    <?php endif; ?>
     </section>
 
 
