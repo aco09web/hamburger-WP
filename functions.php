@@ -88,61 +88,6 @@ class my_Walker extends Walker_Nav_Menu
 remove_filter('term_description', 'wpautop');
 
 
-// 通常カテゴリ-にカスタムフィールドを追加
-function get_categor_meta_ex()
-{
-    return [
-        'subtitle' => 'サブタイトル',
-    ];
-}
-function category_add_form_fields($tag)
-{
-    foreach (get_categor_meta_ex() as $key => $value) {
-        echo '<div class="form-field form-required term-name-wrap"><tr class="form-field"><th><label for="extra_text">' . $value . '</label></th><td>
-                    <input type="text" name="Cat_meta[' . $key . ']" size="25" value="" /></td></tr></div>';
-    }
-};
-function category_edit_form_fields($tag)
-{
-    $cat_id = $tag->term_id;
-    $cat_meta = get_option("category_$cat_id");
-    foreach (get_categor_meta_ex() as $key => $value) {
-        echo '<tr class="form-field"><th><label for="extra_text">' . $value . '</label></th><td><input type="text" name="Cat_meta[' . $key . ']" size="25" value="' . $cat_meta[$key] . '" /></td></tr>';
-    }
-};
-add_action('category_add_form_fields', 'category_add_form_fields');
-add_action('category_edit_form_fields', 'category_edit_form_fields');
-function save_category($category_id)
-{
-    $cat_meta = get_option("category_$category_id");
-    if (isset($_POST['Cat_meta'])) {
-        //配列キーがあった場合の処理
-        $cat_keys = array_keys($_POST['Cat_meta']);
-        foreach ($cat_keys as $key) {
-            if (isset($_POST['Cat_meta'][$key])) {
-                $cat_meta[$key] = $_POST['Cat_meta'][$key];
-            }
-        }
-    }
-
-    update_option("category_$category_id", $cat_meta);
-};
-add_action('edited_term', 'save_category');
-add_action('created_term', 'save_category');
-add_action('init', 'my_add_pages_categories');
-function my_add_pages_categories()
-{
-    register_taxonomy_for_object_type('category', 'page');
-}
-add_action('pre_get_posts', 'my_set_page_categories');
-function my_set_page_categories($query)
-{
-    if ($query->is_category == true && $query->is_main_query()) {
-        $query->set('post_type', array('post', 'page', 'nav_menu_item'));
-    }
-}
-
-
 
 
 //ページャーのクラス名変更/*w-pagenavi css置換 */

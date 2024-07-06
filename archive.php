@@ -16,15 +16,17 @@
 
     <section class="c-section--container--primary">
         <h2 class="c-section__heading2 c-text--bold">
+
             <?php
-            $categories = get_the_category();
-            $cat_meta = [];
-            foreach ($categories as $category) {
-                $category_meta = get_option("category_$category->cat_ID");
+            $cat_id = get_queried_object()->cat_ID; //カテゴリーIDを取得
+            $post_id = 'category_' . $cat_id;
+            if (is_active_acf()) { //ACFプラグインが有効になっている場合
+                //カスタムフィールドを取得・出力
+                if (get_field('cat_field', $post_id)) {
+                    echo get_field('cat_field', $post_id);
+                }
+            } else { //ACFプラグインが有効になっていない場合
             }
-            ?>
-            <?php
-            echo $category_meta["subtitle"]; //カスタムフィールド入力値を表示する。カテゴリー小見出し出力
             ?>
 
         </h2>
