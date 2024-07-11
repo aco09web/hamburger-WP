@@ -9,7 +9,7 @@
     <section class="c-section--container--primary">
 
         <h2 class="c-section__heading2 c-text--bold">
-            <?php echo esc_html(get_search_query()); ?>の検索結果
+            <?php echo esc_html(get_search_query()); ?><?php echo esc_attr_e('Search results for', 'hamburger'); ?>
         </h2>
 
 
@@ -40,7 +40,7 @@
                                                                                         ?>
                                         <?php echo $excerpt; ?>
                                     <?php endif; ?></p>
-                                <p class="p-card__text c-text--white c-font-size--primar">
+                                <p class="p-card__text c-text--white c-font-size--primary">
                                     <?php $content = esc_html(get_the_content()); ?>
                                     <?php
                                     // HTMLタグの除去
@@ -48,16 +48,16 @@
                                     // ショートコードの除去
                                     $content = strip_shortcodes($content);
                                     echo wp_trim_words(get_the_content(), 100, '...'); ?></p>
-                                <div class="p-card__link--container"><a href="<?php the_permalink(); ?>" class="p-card__link c-text--bold c-bg-color--white c-text--gray--primary">詳しく見る</a></div>
+                                <div class="p-card__link--container"><a href="<?php the_permalink(); ?>" class="p-card__link c-text--bold c-bg-color--white c-text--gray--primary"><?php echo esc_attr_e('Read more', 'hamburger'); ?></a></div>
                             </div>
                         </div>
                     </li>
-                <?php endwhile; //投稿内容の繰り返し処理が終わって一度のみ何かをしたいときはココに書く
+                <?php endwhile; //投稿内容の繰り返し処理が終わって一度のみの処理がある場合
                 ?>
         </ul>
-    <?php else : //投稿データがない場合の処理「投稿記事がありません」とフロントで表示させる
+    <?php else : //投稿データがない場合の処理
     ?>
-        <p>検索したキーワードに合致するデータがありません</p>
+        <p><?php echo esc_attr_e('There are no data matching the keywords searched.', 'hamburger'); ?></p>
     <?php endif; ?>
 
     <?php if (function_exists('wp_pagenavi')) : ?>

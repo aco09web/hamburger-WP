@@ -308,9 +308,10 @@
     }
     }
     blockquote {
-    background-color: g.$color--background-skyblue;
+        background-color: g.$color--background-skyblue;
         padding: 30px 20px;
         margin-bottom: 30px;
+        border: none;
     @include g.breakpoint(tablet){
         padding: 50px 53px;
         margin-bottom: 60px;
@@ -482,4 +483,43 @@
             padding: 1.51v 1.56vw 1.25vw;
     }
     }
+    .wp-caption {
+    color: #666;
+    font-size: 13px;
+    font-size: 0.8125rem;
+    font-style: italic;
+    margin-bottom: 1.5em;
+    max-width: 100%;
+    }
+    .wp-caption-text {
+        margin: 0.8075em 0;
+    }
+    .sticky {
+    position: relative;
+    }
+    .gallery-caption {
+        font-size: 13px;
+        font-size: 0.8125rem;
+    }
+    .bypostauthor {
+    border: 1px solid #333;
+    padding: 2px;
+    }
+    .alignleft {
+        display: inline;
+        float: left;
+        margin-right: 1.5em;
+    }
+    .alignright {
+        display: inline;
+        float: right;
+        margin-left: 1.5em;
+    }
+    .aligncenter {
+        clear: both;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
 }

@@ -71,7 +71,7 @@
                         <div class="p-card__text--body">
                             <h3 class="p-card__title c-text--bold c-text--white"><?php the_title(); ?></h3>
                             <p class="p-card__subtitle c-text--bold c-text--white"><?php echo esc_html(get_the_excerpt()); ?></p>
-                            <p class="p-card__text c-text--white c-font-size--primar">
+                            <p class="p-card__text c-text--white c-font-size--primary">
                                 <?php $content = esc_html(get_the_content()); ?>
                                 <?php
                                 // HTMLタグの除去
@@ -79,7 +79,7 @@
                                 // ショートコードの除去
                                 $content = strip_shortcodes($content);
                                 echo wp_trim_words(get_the_content(), 126, '...'); ?></p>
-                            <div class="p-card__link--container"><a href="<?php the_permalink(); ?>" class="p-card__link c-text--bold c-bg-color--white c-text--gray--primary">詳しく見る</a></div>
+                            <div class="p-card__link--container"><a href="<?php the_permalink(); ?>" class="p-card__link c-text--bold c-bg-color--white c-text--gray--primary"><?php echo esc_attr_e('Read more', 'hamburger'); ?></a></div>
                         </div>
                     </div>
                 </li>
@@ -88,7 +88,7 @@
     </ul>
 <?php else : //投稿データがない場合の処理「投稿記事がありません」とフロントで表示させる
 ?>
-    <p>投稿データがありません</p>
+    <p><?php echo esc_attr_e('No postings.', 'hamburger'); ?></p>
 <?php endif; ?>
 <?php if (is_active_wp_pagenavi()) : //WP-PageNaviプラグインが有効になっている場合 
 ?>

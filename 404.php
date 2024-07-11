@@ -55,7 +55,7 @@
             <?php endforeach; ?>
         <?php else : // 記事がない場合 
         ?>
-            <h1 class="p-frontHero__title c-text--bold c-text--white">ダミーサイト</h1>
+            <h1 class="p-frontHero__title c-text--bold c-text--white"><?php echo esc_attr_e('Site Title', 'hamburger'); ?></h1>
             <img class="p-frontHero__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/hero_01.webp" alt=”hamburger”>
         <?php endif;
         wp_reset_postdata(); ?>
@@ -63,7 +63,7 @@
     <div class="p-contents">
         <div class="u-mg-bottom--primary">
             <p>404 NOT FOUND</p>
-            <p>お探しのページは見つかりませんでした</p>
+            <p><?php echo esc_attr_e('The page you are looking for could not be found.', 'hamburger'); ?></p>
         </div>
     </div>
 

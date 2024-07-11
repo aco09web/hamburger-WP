@@ -4,7 +4,13 @@ Description: RaiseTech練習用テーマ
 Version: 1.0.0
 Theme URI: https://github.com/aco09web/hamburger-WP
 Author: aco
-License: テーマのライセンス
-License URI: テーマのライセンスのURI
+Author URI: https://github.com/aco09web
+Tested up to: 6.5
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: テキストドメイン
+Requires PHP: 8.1
+Text Domain: hamburger
+Domain Path: /languages
+Tags: food-and-drink, editor-style, right-sidebar
 */

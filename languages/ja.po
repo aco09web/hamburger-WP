@@ -1,0 +1,59 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: hamburger\n"
+"POT-Creation-Date: 2024-07-10 11:58+0900\n"
+"PO-Revision-Date: 2024-07-11 11:00+0900\n"
+"Last-Translator: \n"
+"Language-Team: aco\n"
+"Language: ja_JP\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: _e;__;_n;esc_attr_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:58 front-page.php:58
+msgid "Site Title"
+msgstr "サイトタイトル"
+
+#: 404.php:66
+msgid "The page you are looking for could not be found."
+msgstr "お探しのページは見つかりませんでした。"
+
+#: archive.php:78 search.php:51 taxonomy-takeout-eatin-cat.php:82
+msgid "Read more"
+msgstr "詳しく見る"
+
+#: archive.php:88 front-page.php:94 front-page.php:126 front-page.php:178
+#: index.php:179 taxonomy-takeout-eatin-cat.php:91
+msgid "No postings."
+msgstr "投稿がありません。"
+
+#: front-page.php:155
+msgid "No title entered."
+msgstr "タイトルの入力がありません。"
+
+#: front-page.php:165
+msgid "No text input."
+msgstr "本文の入力がありません。"
+
+#: search.php:12
+msgid "Search results for"
+msgstr "の検索結果"
+
+#: search.php:60
+msgid "There are no data matching the keywords searched."
+msgstr "検索されたキーワードに一致するデータはありません。"
+
+#: searchform.php:5 searchform.php:12
+msgid "search"
+msgstr "検索"
+
+#: sidebar.php:3
+msgid "Close menu"
+msgstr "メニューを閉じる"
+
+#~ msgid "Drop Shadow"
+#~ msgstr "ドロップシャドウ"

@@ -55,7 +55,7 @@
             <?php endforeach; ?>
         <?php else : // 記事がない場合 
         ?>
-            <h1 class="p-frontHero__title c-text--bold c-text--white">ダミーサイト</h1>
+            <h1 class="p-frontHero__title c-text--bold c-text--white"><?php echo esc_attr_e('Site Title', 'hamburger'); ?></h1>
             <img class="p-frontHero__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/hero_01.webp" alt=”hamburger”>
         <?php endif;
         wp_reset_postdata(); ?>
@@ -91,7 +91,7 @@
                 <?php endforeach; ?>
             <?php else : // 記事がない場合 
             ?>
-                <li>まだ投稿がありません。</li>
+                <li><?php echo esc_attr_e('No postings.', 'hamburger'); ?></li>
             <?php endif;
             wp_reset_postdata(); ?>
         </dl>
@@ -123,7 +123,7 @@
                 <?php endforeach; ?>
             <?php else : // 記事がない場合 
             ?>
-                <li>まだ投稿がありません。</li>
+                <li><?php echo esc_attr_e('No postings.', 'hamburger'); ?></li>
             <?php endif;
             wp_reset_postdata(); ?>
 
@@ -152,8 +152,8 @@
                             $post_id   = $data->ID; //アクセス情報のIDを取得
                             if (empty($post_tit)) : //タイトルが空（未入力）の場合の処理
                             ?>
-                                <?php echo 'タイトルの入力がありません。' . "\n" ?>
-                            <?php else : //タイトルが空（未入力）ではない場合の処理
+                                <?php echo esc_attr_e('No title entered.', 'hamburger'); ?>
+                            <?php else :
                             ?>
                                 <?php the_title(); ?>
                             <?php endif; ?>
@@ -162,8 +162,7 @@
                             <?php
                             if (empty($post_con)) : //本文が空（未入力）の場合の処理
                             ?>
-                                <?php echo '本文の入力がありません。' . "\n" //本文が空（未入力）ではない場合の処理
-                                ?>
+                                <?php echo esc_attr_e('No text input.', 'hamburger'); ?>
                             <?php else : ?>
                                 <?php
                                 // カスタム投稿の本文を取得
@@ -176,7 +175,7 @@
                     <?php endforeach; ?>
                 <?php else : // 記事がない場合 
                 ?>
-                    <p class="c-text--white c-text--bold">まだ投稿がありません。</p>
+                    <p class="c-text--white c-text--bold"><?php echo esc_attr_e('No postings.', 'hamburger'); ?></p>
                 <?php endif;
                 wp_reset_postdata(); ?>
             </div>

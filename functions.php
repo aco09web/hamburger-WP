@@ -1,12 +1,26 @@
+
 <?php
+//テーマの翻訳対応
+function hamburger_theme_setup()
+{
+    load_theme_textdomain('hamburger', get_template_directory() . '/languages');
+}
+add_action('after_setup_theme', 'hamburger_theme_setup');
+
+
 //テーマサポート
 add_theme_support('title-tag');
-// アイキャッチ画像を利用できるようにする
-add_theme_support('post-thumbnails');
-//エディタスタイルを利用できるようにする
-add_theme_support('editor-styles');
-//WordPressでフィードを利用できるようにする
-add_theme_support('automatic-feed-links');
+add_theme_support('post-thumbnails'); // アイキャッチ画像を利用できるようにする
+add_theme_support('editor-styles'); //エディタスタイルを利用できるようにする
+add_theme_support('automatic-feed-links'); //WordPressでフィードを利用できるようにする
+add_theme_support('custom-header'); //テーマのカスタマイザーを使ってヘッダー画像を変更することができる
+add_theme_support("wp-block-styles"); //ブロックエディタ側での装飾を実際の公開画面にも反映させる
+add_theme_support("responsive-embeds"); //Youtubeなどの外部メディアを読み込んだ時に独自クラスを追加する
+add_theme_support("custom-logo"); //カスタムロゴを有効にする
+add_theme_support("align-wide"); //ブロックエディタで可能となった、画面全体を使っての画像の挿入を有効にする
+add_theme_support("custom-background"); //bodyタグ内の背景画像を有効にする
+add_theme_support('html5', array('comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script')); //WordPressコアから出力されるHTMLタグをHTML5のフォーマットにする
+
 
 //タイトル出力
 function hamburger_title($title)
@@ -34,14 +48,7 @@ function my_script_init()
 }
 add_action('wp_enqueue_scripts', 'my_script_init');
 
-// 画像ファイルの拡張子を追加
-function custom_upload_mimes($existing_mimes)
-{
-    // ICOファイルを追加する
-    $existing_mimes['ico'] = 'image/vnd.microsoft.icon';
-    return $existing_mimes;
-}
-add_filter('upload_mimes', 'custom_upload_mimes');
+
 
 //2つのナビゲーションメニューを登録する
 function register_my_menus()
@@ -148,16 +155,13 @@ function add_next_post_link_class()
     return 'class="p-pagination__arrow-next-secondary"';
 }
 
+//エディタにオリジナルのスタイルを適用
 //エディターとサイトのフロントの両方でeditor-style.cssを読み込ませる
 function hamburger_enqueue_styles()
 {
     wp_enqueue_style('editor-style', get_template_directory_uri() . '/css/editor-style.css');
 }
-
 add_action('enqueue_block_assets', 'hamburger_enqueue_styles');
-
-
-
 
 //search-form
 //投稿ページのみ検索されるように設定
@@ -186,7 +190,6 @@ add_action('parse_query', 'empty_search_redirect');
 
 
 
-
 //投稿を古い順に並び変える
 function change_old($query)
 {
@@ -194,85 +197,6 @@ function change_old($query)
     $query->set('orderby', 'date');
 }
 add_action('pre_get_posts', 'change_old');
-
-
-
-
-
-
-//TakeOutとEatInのカスタム投稿
-/* ---------- カスタム投稿タイプを追加 ---------- */
-
-
-function create_post_type()
-{
-    $Supportcustom = [ // 投稿画面で表示される項目の設定
-        'title', // 記事タイトル
-        'editor', // 記事本文
-        'thumbnail', // アイキャッチ画像
-    ];
-    register_post_type(
-        'takeout',
-        array(
-            'label' => 'TakeOut',
-            'public' => true,
-            'has_archive' => true,
-            'show_in_rest' => true,
-            'menu_position' => 5,
-            'supports' => array(
-                'title',
-                'editor',
-                'revisions',
-            ),
-        )
-    );
-    register_post_type(
-        'eatin',
-        array(
-            'label' => 'EatIn',
-            'public' => true,
-            'has_archive' => true,
-            'show_in_rest' => true,
-            'menu_position' => 6,
-            'supports' => array(
-                'title',
-                'editor',
-                'revisions',
-            ),
-        )
-    );
-    register_post_type(
-        'mainvisual',
-        array(
-            'label' => 'メインビジュアル',
-            'public' => true,
-            'show_in_rest' => true,
-            'menu_position' => 7,
-            'supports' => array(
-                'title',
-                'editor',
-                'revisions',
-                'custom-fields',
-            ),
-        )
-    );
-    register_post_type(
-        'access',
-        array(
-            'label' => 'アクセス',
-            'public' => true,
-            'show_in_rest' => true,
-            'menu_position' => 8,
-            'supports' => array(
-                'title',
-                'editor',
-                'revisions',
-                'custom-fields',
-            ),
-        )
-    );
-}
-add_action('init', 'create_post_type');
 
 
 /**
@@ -297,23 +221,6 @@ add_filter('pre_get_posts', 'change_post_types_admin_order');
 
 
 
-/* ---------- カスタムタクソノミー（カテゴリー）の追加 ---------- */
-add_action('init', 'custom_taxonomy_cat');
-function custom_taxonomy_cat()
-{
-    register_taxonomy( // カスタムタクソノミーの追加関数
-        'takeout-eatin-cat', // カテゴリーの名前（半角英数字の小文字）
-        'post', // カテゴリーを追加したいカスタム投稿タイプ名
-
-        array(      // オプション（以下
-            'label' => 'TakeOut、EatInカテゴリー', // 表示名称
-            'public' => true, // 管理画面に表示するかどうかの指定
-            'hierarchical' => true, // 階層を持たせるかどうか
-            'show_in_rest' => true, // REST APIの有効化。ブロックエディタの有効化。
-            'show_admin_column' => true, //管理画面の記事一覧に項目を作るか 
-        )
-    );
-}
 
 
 
@@ -350,7 +257,7 @@ function custom_search($search, $wp_query)
                         OR t.slug LIKE '{$search_word}'
                         OR tt.description LIKE '{$search_word}'
                         )
-          /*タグ名・カテゴリ名を検索対象に含める記述 end*/
+        /*タグ名・カテゴリ名を検索対象に含める記述 end*/
                 ) ";
             }
         }
@@ -359,10 +266,6 @@ function custom_search($search, $wp_query)
     return $search;
 }
 add_filter('posts_search', 'custom_search', 10, 2);
-
-
-//固定ページで抜粋を使えるようにする
-add_post_type_support('page', 'excerpt');
 
 
 //Advanced custom fieldプラグインの使用判定
@@ -388,3 +291,13 @@ function is_active_wp_pagenavi()
         return false;
     }
 }
+
+//ブロックスタイルを追加
+register_block_style(
+    'core/image',
+    array(
+        'name'         => 'drop-shadow',
+        'label'        => 'Drop Shadow',
+        'inline_style' => '.wp-block-image.is-style-drop-shadow { box-shadow: rgb(128, 128, 128) 4px 4px 4px 2px; }',
+    )
+);

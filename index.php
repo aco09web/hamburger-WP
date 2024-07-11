@@ -176,7 +176,7 @@
                     <?php endforeach; ?>
                 <?php else : // 記事がない場合 
                 ?>
-                    <p class="c-text--white c-text--bold">まだ投稿がありません。</p>
+                    <p class="c-text--white c-text--bold"><?php echo esc_attr_e('No postings.', 'hamburger'); ?></p>
                 <?php endif;
                 wp_reset_postdata(); ?>
             </div>
