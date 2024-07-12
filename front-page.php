@@ -3,26 +3,22 @@
     <div class="p-frontHero">
         <?php
         $mainvisual_args = [
-            'post_type' => 'mainvisual', // カスタム投稿名が「mainvisual」の場合
+            'post_type' => 'mainvisual', // カスタム投稿：mainvisual
             'posts_per_page' => 1, // 表示する数
         ];
         $mainvisual_posts = get_posts($mainvisual_args); ?>
-
         <?php if ($mainvisual_posts) : foreach ($mainvisual_posts as $post) : setup_postdata($post); // 投稿がある場合 ▽ ループ開始 ▽
         ?>
                 <?php
                 if (is_active_acf()) : //ACFプラグインが有効になっている場合
-                    // ページスラッグからIDを取得
-                    //カスタム投稿タイプ（投稿タイプ：mainvisual）
+                    //カスタム投稿：mainvisualのページスラッグからIDを取得
                     $post_type = 'mainvisual';
                     $data      = get_page_by_path('mainvisual', OBJECT, $post_type);
                     $post_id   = $data->ID;
                 ?>
                     <?php if (get_field('hero-img', $post_id)) : // 画像がカスタムフィールドにある場合
                     ?>
-                        <img class="p-frontHero__image" src="<?php
-                                                                the_field('hero-img', $post_id);
-                                                                ?>" alt=””>
+                        <img class="p-frontHero__image" src="<?php the_field('hero-img', $post_id); ?>" alt=””>
                     <?php else : // 画像がカスタムフィールドにない場合
                     ?>
                         <img class="p-frontHero__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/hero_01.webp" alt=”hamburger”>
@@ -31,11 +27,10 @@
                 ?>
                     <img class="p-frontHero__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/hero_01.webp" alt=”hamburger”>
                 <?php endif; ?>
-
                 <h1 class=" p-frontHero__title c-text--bold c-text--white">
                     <?php
                     $post_type = 'parts';
-                    $data      = get_page_by_path('mainvisual', OBJECT, $post_type); //メインビジュアルのカスタム投稿のタイトルを取得
+                    $data      = get_page_by_path('mainvisual', OBJECT, $post_type); //カスタム投稿：mainvisualのタイトルを取得
                     $post_tit   = $data->post_title;
                     if (empty($post_tit)) : //タイトルが空（未入力）の場合の処理
                     ?>
@@ -47,11 +42,10 @@
                         $data      = get_page_by_path('mainvisual', OBJECT, $post_type);
                         $post_id   = $data->ID;
                         $title = get_the_title($post_id);
-                        echo $title; //メインビジュアルのカスタム投稿のタイトルを出力
+                        echo $title;
                         ?>
                     <?php endif; ?>
                 </h1>
-
             <?php endforeach; ?>
         <?php else : // 記事がない場合 
         ?>
@@ -63,20 +57,16 @@
     <div class="p-contents">
         <dl class="p-contents__list p-contents__list__takeOut">
             <dt class="p-contents__title c-text--gray--secondary c-text--bold c-font--title">Take Out</dt>
-
             <?php
             $takeout_args = [
                 'post_type' => 'takeout', // カスタム投稿名が「takeout」の場合
                 'posts_per_page' => 2, // 表示する数
             ];
             $takeout_posts = get_posts($takeout_args); ?>
-
             <?php if ($takeout_posts) : foreach ($takeout_posts as $post) : setup_postdata($post); // 投稿がある場合 ▽ ループ開始 ▽
             ?>
-
                     <dd class="p-contents__text">
                         <a href='<?php echo esc_url(get_term_link('take-out-cat', 'takeout-eatin-cat')); ?>'>
-
                             <p class="p-contents__subTitle c-text--bold c-font--title"><?php the_title(); ?></p>
                             <p class="p-contents__subText"><?php if (isset($content)) $content = esc_html(get_the_content()); ?>
                                 <?php
@@ -85,7 +75,8 @@
                                     $content = strip_tags($content);
                                     echo $content();
                                 } ?>
-                                <?php the_content(); ?></p>
+                                <?php the_content(); ?>
+                            </p>
                         </a>
                     </dd>
                 <?php endforeach; ?>
@@ -95,16 +86,15 @@
             <?php endif;
             wp_reset_postdata(); ?>
         </dl>
+
         <dl class="p-contents__list p-contents__list__eatIn">
             <dt class="p-contents__title c-text--white c-text--bold">Eat In</dt>
-
             <?php
             $takeout_args = [
                 'post_type' => 'eatin', // カスタム投稿名が「eatin」の場合
                 'posts_per_page' => 2, // 表示する数
             ];
             $takeout_posts = get_posts($takeout_args); ?>
-
             <?php if ($takeout_posts) : foreach ($takeout_posts as $post) : setup_postdata($post); // 投稿がある場合 ▽ ループ開始 ▽
             ?>
                     <dd class="p-contents__text">
@@ -117,7 +107,8 @@
                                     $content = strip_tags($content);
                                     echo $content();
                                 } ?>
-                                <?php the_content(); ?></p>
+                                <?php the_content(); ?>
+                            </p>
                         </a>
                     </dd>
                 <?php endforeach; ?>
@@ -126,10 +117,8 @@
                 <li><?php echo esc_attr_e('No postings.', 'hamburger'); ?></li>
             <?php endif;
             wp_reset_postdata(); ?>
-
         </dl>
     </div>
-    </dl>
 
     <div class="p-access">
         <div class="p-access__wrapper">
@@ -140,7 +129,6 @@
                     'posts_per_page' => 1, // 表示する数
                 ];
                 $access_posts = get_posts($access_args); ?>
-
                 <?php if ($access_posts) : foreach ($access_posts as $post) : setup_postdata($post); // 投稿がある場合 ▽ ループ開始 ▽
                 ?>
                         <h2 class="p-access__title c-text--bold c-text--white">

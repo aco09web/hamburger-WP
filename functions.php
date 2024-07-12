@@ -50,6 +50,8 @@ add_action('wp_enqueue_scripts', 'my_script_init');
 
 
 
+
+//ナビゲーションメニュー
 //2つのナビゲーションメニューを登録する
 function register_my_menus()
 {
@@ -70,8 +72,7 @@ function add_additional_class_on_li($classes, $item, $args)
 }
 add_filter('nav_menu_css_class', 'add_additional_class_on_li', 1, 3);
 
-
-//カスタムウォーカー設定
+//ナビゲーションメニューのカスタムウォーカー設定
 class my_Walker extends Walker_Nav_Menu
 {
     function start_lvl(&$output, $depth = 0, $args = array()) //レベルの最初の部分（= <ul>）
@@ -91,13 +92,15 @@ class my_Walker extends Walker_Nav_Menu
         }
     }
 }
+
 //カテゴリ説明文から自動で付与されるpタグを除去
 remove_filter('term_description', 'wpautop');
 
 
 
 
-//ページャーのクラス名変更/*w-pagenavi css置換 */
+//WP-PageNavi
+//ページナビゲーション要素に割り当てられているデフォルトのクラス名を変更する
 // 現在のページ数部分に付与されるclass
 function wp_pagenavi_class_pages_func($class_name)
 {
@@ -140,7 +143,6 @@ function wp_pagenavi_class_current_func($class_name)
 }
 add_filter('wp_pagenavi_class_current', 'wp_pagenavi_class_current_func');
 
-
 //デフォルトのページャーの前の記事・次の記事のリンクにclassを付与する
 
 add_filter('previous_posts_link_attributes', 'add_prev_post_link_class');
@@ -155,6 +157,9 @@ function add_next_post_link_class()
     return 'class="p-pagination__arrow-next-secondary"';
 }
 
+
+
+
 //エディタにオリジナルのスタイルを適用
 //エディターとサイトのフロントの両方でeditor-style.cssを読み込ませる
 function hamburger_enqueue_styles()
@@ -162,6 +167,9 @@ function hamburger_enqueue_styles()
     wp_enqueue_style('editor-style', get_template_directory_uri() . '/css/editor-style.css');
 }
 add_action('enqueue_block_assets', 'hamburger_enqueue_styles');
+
+
+
 
 //search-form
 //投稿ページのみ検索されるように設定
@@ -188,45 +196,7 @@ function empty_search_redirect($wp_query)
 }
 add_action('parse_query', 'empty_search_redirect');
 
-
-
-//投稿を古い順に並び変える
-function change_old($query)
-{
-    $query->set('order', 'ASC');
-    $query->set('orderby', 'date');
-}
-add_action('pre_get_posts', 'change_old');
-
-
-/**
- * カスタム投稿の記事一覧で並び順を日付降順に変更
- */
-
-function change_post_types_admin_order($wp_query)
-{
-    if (is_admin()) {
-        $post_type_array = array('takeout', 'eatin'); // カスタム投稿のスラッグ（post_type）
-        $post_type = $wp_query->query['post_type'];
-        $get_orderby = get_query_var('orderby');
-        if ($post_type && $get_orderby) {
-            if (in_array($post_type, $post_type_array) && $get_orderby === 'menu_order title') {
-                $wp_query->set('orderby', 'date'); // data = 日付
-                $wp_query->set('order', 'DESC'); // DESC = 降順
-            }
-        }
-    }
-}
-add_filter('pre_get_posts', 'change_post_types_admin_order');
-
-
-
-
-
-
-//-----------------------------------------------------
 // 検索対象にカテゴリを含める
-//-----------------------------------------------------
 function custom_search($search, $wp_query)
 {
     global $wpdb;
@@ -268,6 +238,36 @@ function custom_search($search, $wp_query)
 add_filter('posts_search', 'custom_search', 10, 2);
 
 
+
+
+//投稿を古い順に並び変える
+function change_old($query)
+{
+    $query->set('order', 'ASC');
+    $query->set('orderby', 'date');
+}
+add_action('pre_get_posts', 'change_old');
+
+//カスタム投稿の記事一覧で並び順を日付降順に変更
+function change_post_types_admin_order($wp_query)
+{
+    if (is_admin()) {
+        $post_type_array = array('takeout', 'eatin'); // カスタム投稿のスラッグ（post_type）
+        $post_type = $wp_query->query['post_type'];
+        $get_orderby = get_query_var('orderby');
+        if ($post_type && $get_orderby) {
+            if (in_array($post_type, $post_type_array) && $get_orderby === 'menu_order title') {
+                $wp_query->set('orderby', 'date'); // data = 日付
+                $wp_query->set('order', 'DESC'); // DESC = 降順
+            }
+        }
+    }
+}
+add_filter('pre_get_posts', 'change_post_types_admin_order');
+
+
+
+
 //Advanced custom fieldプラグインの使用判定
 function is_active_acf()
 {
@@ -291,6 +291,9 @@ function is_active_wp_pagenavi()
         return false;
     }
 }
+
+
+
 
 //ブロックスタイルを追加
 register_block_style(

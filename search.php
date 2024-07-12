@@ -1,21 +1,18 @@
 <?php get_header(); ?>
 <main class="l-main">
     <section class="p-archive--Hero c-bg-color--black">
-        <h1 class="p-archive__title c-text--bold c-text--white c-font--title">Search:<span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary"><?php echo esc_html(get_search_query()); ?></span></h1>
-
-        <figure><img class="p-archive__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/archive-top-pc.webp" alt=”hamburger”></figure>
+        <h1 class="p-archive__title c-text--bold c-text--white c-font--title">Search:
+            <span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary"><?php echo esc_html(get_search_query()); ?></span>
+        </h1>
+        <figure>
+            <img class="p-archive__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/archive-top-pc.webp" alt=”hamburger”>
+        </figure>
     </section>
 
     <section class="c-section--container--primary">
-
         <h2 class="c-section__heading2 c-text--bold">
             <?php echo esc_html(get_search_query()); ?><?php echo esc_attr_e('Search results for', 'hamburger'); ?>
         </h2>
-
-
-
-
-
         <ul>
             <?php if (have_posts()) : //投稿データがあるか調べる
             ?>
@@ -34,10 +31,10 @@
                             </figure>
                             <div class="p-card__text--body">
                                 <h3 class="p-card__title c-text--bold c-text--white"><?php esc_html(the_title()); ?></h3>
-                                <p class="p-card__subtitle c-text--bold c-text--white"><?php
-                                                                                        $excerpt = esc_html(get_the_excerpt());
-                                                                                        if (has_excerpt()) : //抜粋があるかどうか
-                                                                                        ?>
+                                <p class="p-card__subtitle c-text--bold c-text--white">
+                                    <?php $excerpt = esc_html(get_the_excerpt());
+                                    if (has_excerpt()) : //抜粋があるかどうか
+                                    ?>
                                         <?php echo $excerpt; ?>
                                     <?php endif; ?></p>
                                 <p class="p-card__text c-text--white c-font-size--primary">
@@ -45,9 +42,8 @@
                                     <?php
                                     // HTMLタグの除去
                                     $content = strip_tags($content);
-                                    // ショートコードの除去
-                                    $content = strip_shortcodes($content);
-                                    echo wp_trim_words(get_the_content(), 100, '...'); ?></p>
+                                    //表示する文字数制限、省略記号を設定
+                                    echo wp_trim_words(get_the_content(), 126, '...'); ?></p>
                                 <div class="p-card__link--container"><a href="<?php the_permalink(); ?>" class="p-card__link c-text--bold c-bg-color--white c-text--gray--primary"><?php echo esc_attr_e('Read more', 'hamburger'); ?></a></div>
                             </div>
                         </div>
@@ -60,23 +56,30 @@
         <p><?php echo esc_attr_e('There are no data matching the keywords searched.', 'hamburger'); ?></p>
     <?php endif; ?>
 
-    <?php if (function_exists('wp_pagenavi')) : ?>
-        <?php wp_pagenavi(array(
-            'before' => '<div class="p-pagination c-text--gray--primary c-font--title">',
-            'after' => '</div>',
-            'wrapper_tag' => 'ul',
-            'wrapper_class' => 'p-pagination__list',
-            //'options' => array( // 管理画面で設定したオプションの上書き
-            //'prev_text' => " ",
-            //'next_text' => " "
-            //)
-        )); ?>
+    <?php if (is_active_wp_pagenavi()) : //WP-PageNaviプラグインが有効になっている場合 
+    ?>
+        <?php if (function_exists('wp_pagenavi')) :
+            wp_pagenavi(array(
+                'before' => '<div class="p-pagination c-text--gray--primary c-font--title">',
+                'after' => '</div>',
+                'wrapper_tag' => 'ul',
+                'wrapper_class' => 'p-pagination__list',
+            )); ?>
+        <?php else : ?>
+        <?php endif; ?>
+    <?php else : //WP-PageNaviプラグインが有効になっていない場合 
+    ?>
+        <?php if ($wp_query->max_num_pages > 1) : //ページ数が1を超える場合に処理 
+        ?>
+            <div class="c-text--gray--primary c-font--title">
+                <ul class="p-pagination__list--secondary u-mg-bottom--primary">
+                    <li><?php previous_posts_link('前へ'); ?></li>
+                    <li><?php next_posts_link('次へ'); ?></li>
+                </ul>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
     </section>
-
-
-
-
 </main>
 </div>
 <?php get_sidebar(); ?>

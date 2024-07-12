@@ -1,22 +1,16 @@
 <?php get_header(); ?>
 <main class="l-main">
-
     <section class="p-archive--Hero c-bg-color--black">
         <h1 class="p-archive__title c-text--bold c-text--white c-font--title">Menu:
             <span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary">
-
                 <?php single_cat_title(); ?>
             </span>
         </h1>
-
         <figure><img class="p-archive__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/archive-top-pc.webp" alt=”hamburger”></figure>
     </section>
 
-
-
     <section class="c-section--container--primary">
         <h2 class="c-section__heading2 c-text--bold">
-
             <?php
             $cat_id = get_queried_object()->cat_ID; //カテゴリーIDを取得
             $post_id = 'category_' . $cat_id;
@@ -28,9 +22,7 @@
             } else { //ACFプラグインが有効になっていない場合
             }
             ?>
-
         </h2>
-
         <p class="c-section__text">
             <?php
             // カテゴリーの説明文を取得
@@ -38,10 +30,7 @@
                 echo category_description();
             }
             ?>
-
         </p>
-
-
 
         <ul>
             <?php if (have_posts()) : //投稿データがあるか調べる
@@ -62,9 +51,9 @@
                             </figure>
                             <div class="p-card__text--body">
                                 <h3 class="p-card__title c-text--bold c-text--white"><?php esc_html(the_title()); ?></h3>
-                                <p class="p-card__subtitle c-text--bold c-text--white"><?php
-                                                                                        $excerpt = esc_html(get_the_excerpt());
-                                                                                        if (has_excerpt()) : ?>
+                                <p class="p-card__subtitle c-text--bold c-text--white">
+                                    <?php $excerpt = esc_html(get_the_excerpt());
+                                    if (has_excerpt()) : ?>
                                         <?php echo $excerpt; ?>
                                     <?php endif; ?></p>
                                 <p class="p-card__text c-text--white c-font-size--primary">
@@ -72,8 +61,7 @@
                                     <?php
                                     // HTMLタグの除去
                                     $content = strip_tags($content);
-                                    // ショートコードの除去
-                                    $content = strip_shortcodes($content);
+                                    //表示する文字数制限、省略記号を設定
                                     echo wp_trim_words(get_the_content(), 126, '...'); ?></p>
                                 <div class="p-card__link--container"><a href="<?php the_permalink(); ?>" class="p-card__link c-text--bold c-bg-color--white c-text--gray--primary"><?php echo esc_attr_e('Read more', 'hamburger'); ?></a></div>
                             </div>
@@ -82,12 +70,10 @@
                 <?php endwhile; //投稿内容の繰り返し処理が終わって一度のみ何かをしたいときはココに書く
                 ?>
         </ul>
-
     <?php else : //投稿データがない場合の処理
     ?>
         <p><?php echo esc_attr_e('No postings.', 'hamburger'); ?></p>
     <?php endif; ?>
-
 
     <?php if (is_active_wp_pagenavi()) : //WP-PageNaviプラグインが有効になっている場合 
     ?>
@@ -97,10 +83,6 @@
                 'after' => '</div>',
                 'wrapper_tag' => 'ul',
                 'wrapper_class' => 'p-pagination__list',
-                //'options' => array( // 管理画面で設定したオプションの上書き
-                //'prev_text' => " ",
-                //'next_text' => " "
-                //)
             )); ?>
         <?php else : ?>
         <?php endif; ?>
@@ -116,10 +98,6 @@
             </div>
         <?php endif; ?>
     <?php endif; ?>
-
-
-
-
     </section>
 
 </main>
