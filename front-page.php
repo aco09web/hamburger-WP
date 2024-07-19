@@ -29,7 +29,7 @@
                 <?php endif; ?>
                 <h1 class=" p-frontHero__title c-text--bold c-text--white">
                     <?php
-                    $post_type = 'parts';
+                    $post_type = 'mainvisual';
                     $data      = get_page_by_path('mainvisual', OBJECT, $post_type); //カスタム投稿：mainvisualのタイトルを取得
                     $post_tit   = $data->post_title;
                     if (empty($post_tit)) : //タイトルが空（未入力）の場合の処理
@@ -37,8 +37,8 @@
                         <?php echo 'タイトルの入力がありません。' . "\n" ?>
                     <?php else : //タイトルが空（未入力）ではない場合の処理
                     ?>
-                        <?php //カスタム投稿タイプ（投稿タイプ：parts）
-                        $post_type = 'parts';
+                        <?php //カスタム投稿タイプ（投稿タイプ：mainvisual）
+                        $post_type = 'mainvisual';
                         $data      = get_page_by_path('mainvisual', OBJECT, $post_type);
                         $post_id   = $data->ID;
                         $title = get_the_title($post_id);
