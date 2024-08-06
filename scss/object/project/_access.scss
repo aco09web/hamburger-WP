@@ -1,7 +1,6 @@
 @use "../../foundation/global" as g;
 
 .p-access{
-    background-color: rgba(0, 0, 0, 1);
     height: auto;
     @include g.breakpoint(pc){
         min-height: 33.802vw;
@@ -9,7 +8,11 @@
 }
 .p-access__contents{
     width: auto;
+    height: 100%;
     padding: 42px 40px;
+    position: absolute;
+    top: 0;
+    z-index: 3;
     &::before{
         content: "";
         height: 60%;
@@ -33,16 +36,39 @@
         min-height: 33.802vw;
     }
 }
+.p-access__bg-black{
+    background-color: rgb(0, 0, 0, 0.2855);
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    @include g.breakpoint(tablet){
+        height: 100%;
+    }
+    @include g.breakpoint(pc){
+        min-height: 33.802vw;
+    }
+}
+.p-access__map{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    @include g.breakpoint(pc){
+    min-height: 33.802vw;
+    }
+}
+
 .p-access__wrapper{
     min-height: 691px;
-    background: url(../images/map-sp_01.webp) no-repeat center center / cover;
     position: relative;
     @include g.breakpoint(tablet){
         min-height: 415px;
-        background: url(../images/map-tablet_01.webp) no-repeat center center / cover;
     }
     @include g.breakpoint(pc){
-        background: url(../images/map_01.webp) no-repeat center center / auto 100%;
         min-height: auto;
     }
 }

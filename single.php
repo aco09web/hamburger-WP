@@ -19,6 +19,30 @@
             <section class=" c-section--container--secondary">
                 <div class="editor-styles-wrapper">
                     <?php the_content(); ?>
+                    <?php
+                    if (is_active_acf()) : //ACFプラグインが有効になっている場合
+                    ?>
+                        <?php if (get_field('recommend-info', $post_id)) : // おすすめ情報タイトルがカスタムフィールドにある場合
+                        ?>
+                            <p class="wp-block-heading c-text--bold">おすすめ情報</p>
+                            <p class="c-text--bold"><?php the_field('recommend-info', $post_id); ?></p>
+                            <?php
+                            $link = get_field('recommend-link');
+                            if ($link) :// おすすめ情報のリンクがカスタムフィールドにある場合
+                                $link_url = $link['url'];
+                                $link_title = $link['title'];
+                                $link_target = $link['target'] ? $link['target'] : '_self';
+                            ?>
+                                <a href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo esc_html($link_title); ?></a>
+                            <?php endif; ?>
+                        <?php else : // おすすめ情報タイトルがカスタムフィールドにない場合
+                        ?>
+                            <p class="c-text--bold">ブログトップ</p>
+                        <?php endif; ?>
+                    <?php else : //ACFプラグインが無効の場合
+                    ?>
+                        <img class="p-frontHero__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/hero_01.webp" alt=”hamburger”>
+                    <?php endif; ?>
                     <?php wp_link_pages(); ?>
                 </div>
             </section>
