@@ -307,6 +307,12 @@
         margin-bottom: 3.64vw;
     }
     }
+    p.p-recommend__item-text{
+        margin-bottom: 24px;
+    @include g.breakpoint(pc){
+        margin-bottom: 1.09vw;
+    }
+    }
     blockquote {
         background-color: g.$color--background-skyblue;
         padding: 30px 20px;
@@ -371,6 +377,18 @@
             margin-bottom: 1.04vw;
         }
     }
+    h3.p-recommend__title{
+    font-size: 2.4rem;
+    line-height: 1.485;
+    margin-bottom: 25px;
+    @include g.breakpoint(tablet){
+        font-size: 3.6rem;
+    }
+    @include g.breakpoint(pc){
+        font-size: 1.88vw;
+        margin-bottom: 1.25vw;
+    }
+}
     h4{
         color: g.$color--brown;
         font-size: 2.0rem;
@@ -432,6 +450,9 @@
     @include g.breakpoint(pc){
         padding: 0 2.6vw;
     }
+    }
+    ul.p-recommend__container{
+        padding: 0;
     }
     pre{
         padding: 50px;

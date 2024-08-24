@@ -379,6 +379,14 @@
     margin-bottom: 3.64vw;
   }
 }
+.editor-styles-wrapper p.p-recommend__item-text {
+  margin-bottom: 24px;
+}
+@media (min-width: 1200.8px) {
+  .editor-styles-wrapper p.p-recommend__item-text {
+    margin-bottom: 1.09vw;
+  }
+}
 .editor-styles-wrapper blockquote {
   background-color: rgb(245, 245, 245);
   padding: 30px 20px;
@@ -456,6 +464,22 @@
     font-size: 1.46vw;
     line-height: 2.17vw;
     margin-bottom: 1.04vw;
+  }
+}
+.editor-styles-wrapper h3.p-recommend__title {
+  font-size: 2.4rem;
+  line-height: 1.485;
+  margin-bottom: 25px;
+}
+@media (min-width: 833.8px) {
+  .editor-styles-wrapper h3.p-recommend__title {
+    font-size: 3.6rem;
+  }
+}
+@media (min-width: 1200.8px) {
+  .editor-styles-wrapper h3.p-recommend__title {
+    font-size: 1.88vw;
+    margin-bottom: 1.25vw;
   }
 }
 .editor-styles-wrapper h4 {
@@ -539,6 +563,9 @@
   .editor-styles-wrapper ul {
     padding: 0 2.6vw;
   }
+}
+.editor-styles-wrapper ul.p-recommend__container {
+  padding: 0;
 }
 .editor-styles-wrapper pre {
   padding: 50px;

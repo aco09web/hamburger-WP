@@ -1,0 +1,62 @@
+@use "../../foundation/global" as g;
+
+.p-recommend__container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 15px;
+    padding: 0;
+    margin-bottom: 150px;
+    @include g.breakpoint(tablet){ 
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 60px;
+    }
+    @include g.breakpoint(pc){
+        gap: 30px;
+        margin-bottom: 6.25vw;
+    }
+}
+.p-recommend__card{
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 2;
+    gap: 0;
+}
+.p-recommend__title{
+    font-size: 2.4rem;
+    line-height: 1.485;
+    margin-bottom: 25px;
+    @include g.breakpoint(tablet){
+        font-size: 3.6rem;
+    }
+    @include g.breakpoint(pc){
+        font-size: 1.88vw;
+        margin-bottom: 1.25vw;
+    }
+}
+.p-recommend__item-title{
+    font-size: 3.2rem;
+    line-height: 1.485;
+    @include g.breakpoint(pc){
+        font-size: 1.88vw;
+    }
+}
+.p-recommend__item-text{
+    font-size: 1.6rem;
+    line-height: 1.485;
+    @include g.breakpoint(pc){
+        font-size: 0.83vw;
+    }
+}
+.p-recommend__text-body{
+    padding: 24px 15px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    @include g.breakpoint(pc){
+    padding: 1.46vw 0.94vw;
+    }
+}
+.p-recommend__link__container{
+    text-align: right;
+    text-decoration: underline;
+}
