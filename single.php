@@ -24,31 +24,32 @@
                     ?>
                         <?php if (get_field('recommend-info', $post_id)) : // おすすめ情報タイトルがカスタムフィールドにある場合
                         ?>
-                            <p class="wp-block-heading c-text--bold">おすすめ情報</p>
-                            <p class="c-text--bold"><?php the_field('recommend-info', $post_id); ?></p>
-                            <?php
-                            $link = get_field('recommend-link');
-                            if ($link) : // おすすめ情報のリンクがカスタムフィールドにある場合
-                                $link_url = $link['url'];
-                                $link_title = $link['title'];
-                                $link_target = $link['target'] ? $link['target'] : '_self';
-                            ?>
-                                <a href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo esc_html($link_title); ?></a>
-                            <?php endif; ?>
-                        <?php else : // おすすめ情報タイトルがカスタムフィールドにない場合
-                        ?>
-                            <p class="c-text--bold"><a href="<?php echo esc_url(home_url('/')); ?>">ブログのトップページへ</a></p>
+                            <h3 class="p-recommend__title c-text--bold c-icon-star__primary">おすすめ情報</h3>
+                            <p class="c-text--bold"><?php the_field('recommend-info', $post_id); ?>
+                                <?php
+                                $link = get_field('recommend-link');
+                                if ($link) : // おすすめ情報のリンクがカスタムフィールドにある場合
+                                    $link_url = $link['url'];
+                                    $link_title = $link['title'];
+                                    $link_target = $link['target'] ? $link['target'] : '_self';
+                                ?><br>
+                                    <span class="c-text--bold"><a href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo esc_html($link_title); ?></a></span>
+                            </p>
                         <?php endif; ?>
-                    <?php else : //ACFプラグインが無効の場合
+                    <?php else : // おすすめ情報タイトルがカスタムフィールドにない場合
                     ?>
-                        <img class="p-frontHero__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/hero_01.webp" alt=”hamburger”>
+                        <p class="c-text--bold"><a href="<?php echo esc_url(home_url('/')); ?>">ブログのトップページへ</a></p>
                     <?php endif; ?>
-                    <?php
-                    if (function_exists('yarpp_related')) {
-                        yarpp_related();
-                    }
-                    ?>
-                    <?php wp_link_pages(); ?>
+                <?php else : //ACFプラグインが無効の場合
+                ?>
+                    <img class="p-frontHero__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/hero_01.webp" alt=”hamburger”>
+                <?php endif; ?>
+                <?php
+                if (function_exists('yarpp_related')) {
+                    yarpp_related();
+                }
+                ?>
+                <?php wp_link_pages(); ?>
                 </div>
             </section>
         </main>

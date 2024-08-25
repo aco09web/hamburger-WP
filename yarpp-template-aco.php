@@ -7,7 +7,7 @@ Description: テスト用テンプレートです。
 ?>
 
 <?php if (have_posts()) : ?>
-    <h3 class="p-recommend__title c-text--brown c-text--bold">★おすすめ商品</h3>
+    <h3 class="p-recommend__title c-text--brown c-text--bold c-icon-star__primary">おすすめ商品</h3>
     <div class="related-post">
         <ul class="p-recommend__container">
             <?php while (have_posts()) : the_post(); ?>

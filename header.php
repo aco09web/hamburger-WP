@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="<?php language_attributes(); ?>">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +20,7 @@ if (is_front_page()) {
     $body_class .= ' single-page';
 }
 ?>
+
 <body <?php body_class($body_class); ?>>
     <?php wp_body_open(); ?>
     <div class="c-wrapper">

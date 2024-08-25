@@ -1,0 +1,22 @@
+@use "../../foundation/global" as g;
+
+.c-icon-star__primary{
+        &::before{
+        font-size: 2.2rem;
+        line-height: 1.485;
+        margin-right: 4px;
+        display: inline-block;
+        font: var(--fa-font-solid);
+        content: "\f005";
+        position: relative;
+        bottom: 1px;
+        @include g.breakpoint(tablet){
+            font-size: 3.2rem;
+        }
+        @include g.breakpoint(pc){
+            font-size: 1.67vw;
+            margin-bottom: 0.47vw;
+            margin-right: 0.47vw;
+        }
+    }
+}

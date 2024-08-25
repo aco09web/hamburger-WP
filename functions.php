@@ -41,6 +41,8 @@ function my_script_init()
     wp_enqueue_style('googlefonts', "//fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&family=Roboto:wght@700&display=swap", array(), null);
     wp_enqueue_style('mystyle', get_template_directory_uri() . '/css/mystyle.css', array(), '1.0.0');
     wp_enqueue_style('style', get_template_directory_uri() . '/style.css', array(), '1.0.0');
+    //font awesome
+    wp_enqueue_script('fontawesome', '//kit.fontawesome.com/7bb4ac3b05.js', array(), '', true);
     // jQuery
     wp_enqueue_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js', array(), 'false', true);
     // main.js
@@ -48,7 +50,15 @@ function my_script_init()
 }
 add_action('wp_enqueue_scripts', 'my_script_init');
 
-
+//font awesome のscriptタグにcrossorigin=”anonymous” を付加するフィルターフック
+add_filter('script_loader_tag', 'custom_script_loader_tag', 10, 2);
+function custom_script_loader_tag($tag, $handle)
+{
+    if ($handle !== 'fontawesome') {
+        return $tag;
+    }
+    return str_replace('></script>', ' crossorigin="anonymous"></script>', $tag);
+}
 
 
 //ナビゲーションメニュー
