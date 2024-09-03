@@ -2,7 +2,11 @@
 <main class="l-main">
     <section class="p-archive--Hero c-bg-color--black">
         <h1 class="p-archive__title c-text--bold c-text--white c-font--title">Search:
-            <span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary"><?php echo esc_html(get_search_query()); ?></span>
+            <span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary"><?php echo esc_html(get_search_query()); ?>（
+                <?php
+                global $wp_query;
+                echo $wp_query->found_posts;
+                ?>件）</span>
         </h1>
         <figure>
             <img class="p-archive__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/archive-top-pc.webp" alt=”hamburger”>

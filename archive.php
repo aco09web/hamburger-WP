@@ -3,7 +3,13 @@
     <section class="p-archive--Hero c-bg-color--black">
         <h1 class="p-archive__title c-text--bold c-text--white c-font--title">Menu:
             <span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary">
-                <?php single_cat_title(); ?>
+                <?php
+                $cat_id = get_queried_object()->cat_ID; //カテゴリーIDを取得
+                $this_cat = get_category($cat_id); //カテゴリーの詳細データを取得
+                $cat_name = $this_cat->name; //カテゴリー名を取得
+                $cat_count = $this_cat->count; //カテゴリーの記事件数を取得
+                ?>
+                <?php echo $cat_name; ?><span>（<?php echo $cat_count; ?>件）</span>
             </span>
         </h1>
         <figure><img class="p-archive__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/archive-top-pc.webp" alt=”hamburger”></figure>
