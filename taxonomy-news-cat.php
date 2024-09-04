@@ -9,6 +9,10 @@
                 $term_name = $obj->name;
                 // 記事数を取得
                 $count = $obj->count;
+                // タームIDの取得
+                $term_id = $obj->term_id;
+                // タクソノミー名
+                $taxonomy = $obj->taxonomy;
                 ?>
                 <?php if (isset($term_name)) : //カテゴリー名またはタグ名が取得できた場合
                     echo $term_name; ?>
@@ -24,20 +28,19 @@
     <section class="c-section--container--primary">
         <h2 class="c-section__heading2 c-text--bold">
             <?php
-            $taxonomy = 'takeout-eatin-cat'; // カスタム分類名
-            $term_slug = get_query_var('term'); //カスタムタクソノミーの情報を取得
-            $the_term = get_term_by('slug', $term_slug, $taxonomy);
-            $term_id = $the_term->term_id; //タクソノミーのIDを取得
             //タームのカスタムフィールドを取得するためのIDは「カスタム分類（タクソノミー）名_タームID」
             $term_idsp = $taxonomy . "_" . $term_id;
             if (is_active_acf()) { //ACFプラグインが有効になっている場合
                 //カスタムフィールドを取得・出力
-                if (get_field('subtitle-takeout-eatin', $term_idsp)) {
-                    echo get_field('subtitle-takeout-eatin', $term_idsp);
+                if (isset($term_idsp)) {
+                    if (get_field('cat_field', $term_idsp)) {
+                        echo get_field('cat_field', $term_idsp);
+                    }
                 }
             } else { //ACFプラグインが有効になっていない場合
             }
             ?>
+
         </h2>
 
         <p class="c-section__text">

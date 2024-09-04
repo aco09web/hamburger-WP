@@ -4,12 +4,20 @@
         <h1 class="p-archive__title c-text--bold c-text--white c-font--title">Menu:
             <span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary">
                 <?php
-                $cat_id = get_queried_object()->cat_ID; //カテゴリーIDを取得
-                $this_cat = get_category($cat_id); //カテゴリーの詳細データを取得
-                $cat_name = $this_cat->name; //カテゴリー名を取得
-                $cat_count = $this_cat->count; //カテゴリーの記事件数を取得
+                if (is_archive()) :
+                    $obj = get_queried_object();
+                    // 名前の取得（カテゴリー名またはタグ名）
+                    $term_name = $obj->name;
+                    // 記事数を取得
+                    $count = $obj->count;
+                endif;
                 ?>
-                <?php echo $cat_name; ?><span>（<?php echo $cat_count; ?>件）</span>
+                <?php if (isset($term_name)) : //カテゴリー名またはタグ名が取得できた場合
+                    echo $term_name; ?>
+                <?php endif; ?>
+                <?php if (isset($count)) : //記事数が取得できた場合
+                    echo '<span>（' . $count . '件）</span>'; ?>
+                <?php endif; ?>
             </span>
         </h1>
         <figure><img class="p-archive__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/archive-top-pc.webp" alt=”hamburger”></figure>

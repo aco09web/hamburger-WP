@@ -3,10 +3,23 @@
     <section class="p-archive--Hero c-bg-color--black">
         <h1 class="p-archive__title c-text--bold c-text--white c-font--title">Menu:
             <span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary">
-                <?php single_cat_title(); ?>
-                <?php $term = get_queried_object(); //アーカイブページならカテゴリオブジェクトを取得できるので、その値からカウント数を取得する
+                <?php
+                $obj = get_queried_object();
+                // 名前の取得（カテゴリー名またはタグ名）
+                $term_name = $obj->name;
+                // 記事数を取得
+                $count = $obj->count;
+                // タームIDの取得
+                $term_id = $obj->term_id;
+                // タクソノミー名
+                $taxonomy = $obj->taxonomy;
                 ?>
-                <span>（<?php echo $term->count; ?>件）</span>
+                <?php if (isset($term_name)) : //カテゴリー名またはタグ名が取得できた場合
+                    echo $term_name; ?>
+                <?php endif; ?>
+                <?php if (isset($count)) : //記事数が取得できた場合
+                    echo '<span>（' . $count . '件）</span>'; ?>
+                <?php endif; ?>
             </span>
         </h1>
         <figure><img class="p-archive__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/archive-top-pc.webp" alt=”hamburger”></figure>
@@ -15,28 +28,24 @@
     <section class="c-section--container--primary">
         <h2 class="c-section__heading2 c-text--bold">
             <?php
-            $taxonomy = 'takeout-eatin-cat'; // カスタム分類名
-            $term_slug = get_query_var('term'); //カスタムタクソノミーの情報を取得
-            $the_term = get_term_by('slug', $term_slug, $taxonomy);
-            $term_id = $the_term->term_id; //タクソノミーのIDを取得
             //タームのカスタムフィールドを取得するためのIDは「カスタム分類（タクソノミー）名_タームID」
             $term_idsp = $taxonomy . "_" . $term_id;
             if (is_active_acf()) { //ACFプラグインが有効になっている場合
                 //カスタムフィールドを取得・出力
-                if (get_field('subtitle-takeout-eatin', $term_idsp)) {
-                    echo get_field('subtitle-takeout-eatin', $term_idsp);
+                if (isset($term_idsp)) {
+                    if (get_field('tag_field', $term_idsp)) {
+                        echo get_field('tag_field', $term_idsp);
+                    }
                 }
             } else { //ACFプラグインが有効になっていない場合
             }
             ?>
+
         </h2>
 
         <p class="c-section__text">
-            <?php //カスタムタクソノミーの説明文を取得。
-            if (is_tax('takeout-eatin-cat', 'take-out-cat')) : ?>
-                <?php echo term_description('21', 'take-out-cat') ?>
-            <?php elseif (is_tax('takeout-eatin-cat', 'eat-in-cat')) : ?>
-                <?php echo term_description('22', 'take-out-cat') ?>
+            <?php if (term_description()): ?>
+                <?php echo term_description(); ?>
             <?php endif; ?>
 
         </p>
