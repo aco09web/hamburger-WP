@@ -4,6 +4,7 @@
         <h1 class="p-archive__title c-text--bold c-text--white c-font--title">Menu:
             <span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary">
                 <?php
+                // クエリ情報を取得
                 $obj = get_queried_object();
                 // 名前の取得（カテゴリー名またはタグ名）
                 $term_name = $obj->name;
@@ -55,29 +56,42 @@
             ?>
                 <?php while (have_posts()) : the_post(); //投稿データがあれば、記事の投稿データを１つずつ取得していく処理を行う。//the_post();ループを次の投稿へ進める
                 ?>
-                    <li class="p-card">
-                        <div class="p-card__body">
+                    <li class="p-card-news">
+                        <div class="p-card-news__body">
                             <?php echo get_post_meta(get_the_ID(), 'cat_field', true); ?>
-                            <figure class="p-card__image--container">
+                            <figure class="p-card-news__image--container">
                                 <?php if (has_post_thumbnail()) : //もしアイキャッチが登録されていたら 
                                 ?>
                                     <?php echo the_post_thumbnail('full', ['class' => 'p-card__image']); ?>
                                 <?php else : //登録されていなかったら 
                                 ?>
-                                    <img class="p-card__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/article_01.webp" alt="hamburger">
+                                    <img class="p-card-news__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/news.webp" alt="hamburger">
                                 <?php endif; ?>
                             </figure>
-                            <div class="p-card__text--body">
-                                <h3 class="p-card__title c-text--bold c-text--white"><?php the_title(); ?></h3>
-                                <p class="p-card__subtitle c-text--bold c-text--white"><?php echo esc_html(get_the_excerpt()); ?></p>
-                                <p class="p-card__text c-text--white c-font-size--primary">
+                            <div class="p-card-news__text--body">
+                                <h3 class="p-card-news__title c-text--bold c-font-size--primary c-text--brown"><?php the_title(); ?></h3>
+                                <ul class="c-flex">
+                                    <?php
+                                    $terms = get_terms('news-cat'); // タクソノミースラッグを指定
+                                    foreach ($terms as $term) {
+                                        echo '<li><a class="p-card-news__cat" href="' . get_term_link($term) . '">' . $term->name . '</a></li>';
+                                    }
+                                    ?></ul>
+                                <ul class="c-flex">
+                                    <?php
+                                    $terms = get_terms('news-tag'); // タクソノミースラッグを指定
+                                    foreach ($terms as $term) {
+                                        echo '<li><a class="c-bg-color--gray p-card-news__tag" href="' . get_term_link($term) . '">' . $term->name . '</a></li>';
+                                    }
+                                    ?></ul>
+                                <p class=" p-card-news__text c-font-size--primary c-text--brown">
                                     <?php $content = esc_html(get_the_content()); ?>
                                     <?php
                                     // HTMLタグの除去
                                     $content = strip_tags($content);
                                     //表示する文字数制限、省略記号を設定
                                     echo wp_trim_words(get_the_content(), 126, '...'); ?></p>
-                                <div class="p-card__link--container"><a href="<?php the_permalink(); ?>" class="p-card__link c-text--bold c-bg-color--white c-text--gray--primary"><?php echo esc_attr_e('Read more', 'hamburger'); ?></a></div>
+                                <div class="p-card-news__link--container"><a href="<?php the_permalink(); ?>" class="p-card-news__link c-text--bold c-text--brown"><?php echo esc_attr_e('Read more', 'hamburger'); ?></a></div>
                             </div>
                         </div>
                     </li>

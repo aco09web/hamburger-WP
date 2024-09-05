@@ -1,0 +1,106 @@
+@use "../../foundation/global" as g;
+
+.p-card-news{
+    width: 100%;
+    margin-bottom: 30px;
+
+    @include g.breakpoint(pc){
+        width: 100%;
+    }
+}
+@include g.breakpoint(tablet){
+    .p-card-news__body:has(.p-card-news__image--container) {
+    display: flex;
+    justify-content: center;
+    }
+}
+
+.p-card-news__image--container{
+    position: relative;
+}
+@include g.breakpoint(tablet){
+    .p-card-news__body:has(.p-card-news__image--container) .p-card-news__image--container {
+    width: 50%;
+    }
+}
+.p-card-news__image{
+    aspect-ratio: 677 / 471;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    @include g.breakpoint(tablet){
+    }
+}
+.p-card-news__text--body{
+    padding: 18px 2px 5px;
+    @include g.breakpoint(tablet){
+        width: 100%;
+        padding: 5px 27px 5px;
+    }
+    @include g.breakpoint(pc){
+        padding: 0.52vw 2.08vw;
+    }
+}
+@include g.breakpoint(tablet){
+    .p-card-news__body:has(.p-card__image--container) .p-card__text--body {
+        width: 50%;
+    }
+}
+.p-card-news__title{
+    font-size: 2.0rem;
+    line-height: 1.485;
+    margin-bottom: 10px;
+    @include g.breakpoint(pc){
+        font-size: 1.875vw;
+        line-height: 2.78vw;
+        margin-bottom: 0.42vw;
+    }
+}
+.p-card-news__cat{
+    font-size: 1.2rem;
+    line-height: 1.485;
+    margin: 0 7px 7px;
+    display: inline-block;
+    @include g.breakpoint(pc){
+        font-size: 0.63vw;
+        line-height: 1.85;
+        margin: 0 0.42vw;
+    }
+}
+.p-card-news__tag{
+    font-size: 1.2rem;
+    line-height: 1.485;
+    margin: 0 7px 15px;
+    padding: 3px 20px;
+    border-radius: 17px;
+    display: inline-block;
+    @include g.breakpoint(pc){
+        font-size: 0.63vw;
+        line-height: 1.85;
+        margin: 0 0.42vw 0.78vw;
+    }
+}
+.p-card-news__text{
+    margin-bottom: 10px;
+    @include g.breakpoint(tablet){
+        margin-bottom: 10px;
+    }
+    @include g.breakpoint(pc){
+        margin-bottom: 0.52vw;
+    }
+}
+.p-card-news__link--container{
+    display: block;
+    text-align: right;
+}
+.p-card-news__link{
+    font-size: 1.6rem;
+    line-height: 1.063;
+    padding-bottom: 1px;
+    text-decoration: underline;
+    @include g.breakpoint(pc){
+        font-size: 0.83vw;
+        line-height: 1.71vw;
+
+    }
+}

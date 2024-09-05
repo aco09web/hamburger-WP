@@ -4,26 +4,29 @@
 ?>
     <?php while (have_posts()) : the_post(); ?>
         <main class="l-main">
-            <section class="p-single--Hero">
-                <h1 class="p-single__title c-text--bold c-text--white"><?php the_title(); ?></h1>
-                <p> <?php
-                    $terms = get_terms('news-cat'); // タクソノミースラッグを指定
-                    foreach ($terms as $term) {
-                        echo '<li><a href="' . get_term_link($term) . '">' . $term->name . '（' . $term->count . '）</a></li>';
-                    }
-                    ?></p>
-                <p> <?php
-                    $terms = get_terms('news-tag'); // タクソノミースラッグを指定
-                    foreach ($terms as $term) {
-                        echo '<li><a href="' . get_term_link($term) . '">' . $term->name . '（' . $term->count . '）</a></li>';
-                    }
-                    ?></p>
+            <section class="p-single-news--Hero">
+                <div class="p-single-news__container">
+                    <h1 class="p-single-news__title c-text--bold c-text--white"><?php the_title(); ?></h1>
+                    <ul class="c-flex"> <?php
+                                        $terms = get_terms('news-cat'); // タクソノミースラッグを指定
+                                        foreach ($terms as $term) {
+                                            echo '<li><a class="p-single-news__cat c-text--white" href="' . get_term_link($term) . '">' . $term->name . '（' . $term->count . '）,' . '</a></li>';
+                                        }
+                                        ?></ul>
+                    <ul class="c-flex"> <?php
+                                        $terms = get_terms('news-tag'); // タクソノミースラッグを指定
+                                        foreach ($terms as $term) {
+                                            echo '<li><a class="p-single-news__tag c-bg-color--gray" href="' . get_term_link($term) . '">' . $term->name . '（' . $term->count . '）</a></li>';
+                                        }
+                                        ?></ul>
+                </div>
+                <div class="p-single-news__bg-black"></div>
                 <figure> <?php if (has_post_thumbnail()) : //もしアイキャッチが登録されていたら 
                             ?>
                         <?php echo the_post_thumbnail('full', ['class' => 'p-single__image']); ?>
                     <?php else : //登録されていなかったら 
                     ?>
-                        <img class="p-single__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/article_01.webp" alt="hamburger">
+                        <img class="p-single__image" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/news.webp" alt="hamburger">
                     <?php endif; ?>
                 </figure>
             </section>

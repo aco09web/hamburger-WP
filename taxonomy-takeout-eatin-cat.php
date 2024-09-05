@@ -4,6 +4,7 @@
         <h1 class="p-archive__title c-text--bold c-text--white c-font--title">Menu:
             <span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary">
                 <?php
+                // クエリ情報を取得
                 $obj = get_queried_object();
                 // 名前の取得（カテゴリー名またはタグ名）
                 $term_name = $obj->name;

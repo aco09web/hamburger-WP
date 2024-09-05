@@ -5,6 +5,7 @@
             <span class="p-archive__title--text c-text--white c-text--bold c-font--primary c-font-size--primary">
                 <?php
                 if (is_archive()) :
+                    // クエリ情報を取得
                     $obj = get_queried_object();
                     // 名前の取得（カテゴリー名またはタグ名）
                     $term_name = $obj->name;
