@@ -20,3 +20,24 @@
         }
     }
 }
+.c-icon-new{
+        &::before{
+        content: "NEW";
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 2.4rem;
+        line-height: 1.485;
+        display: inline-block;
+        background-color: g.$color--background-orange;
+        height: 55px;
+        width: 55px;
+        padding-top: 10px;
+        @include g.breakpoint(pc){
+            font-size: 1.25vw;
+            height: 2.86vw;
+            width: 2.86vw;
+            padding-top:0.52vw;
+        }
+    }
+}

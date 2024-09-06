@@ -670,6 +670,28 @@ a:hover {
   }
 }
 
+.c-icon-new::before {
+  content: "NEW";
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 2.4rem;
+  line-height: 1.485;
+  display: inline-block;
+  background-color: rgb(255, 138, 0);
+  height: 55px;
+  width: 55px;
+  padding-top: 10px;
+}
+@media (min-width: 1200.8px) {
+  .c-icon-new::before {
+    font-size: 1.25vw;
+    height: 2.86vw;
+    width: 2.86vw;
+    padding-top: 0.52vw;
+  }
+}
+
 .p-footer {
   background: url(../images/footer-bg.webp) center center/auto 100%;
   height: 150px;
@@ -1970,6 +1992,7 @@ a:hover {
      object-fit: cover;
 }
 .p-card__text--body {
+  position: relative;
   padding: 32px 17px 44px;
 }
 @media (min-width: 833.8px) {
@@ -2218,6 +2241,7 @@ a:hover {
 }
 .p-card-news__text--body {
   padding: 18px 2px 5px;
+  position: relative;
 }
 @media (min-width: 833.8px) {
   .p-card-news__text--body {

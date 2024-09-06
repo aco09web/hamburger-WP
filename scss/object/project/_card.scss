@@ -15,7 +15,6 @@
     justify-content: center;
     }
 }
-
 .p-card__image--container{
     position: relative;
 }
@@ -33,6 +32,7 @@
     }
 }
 .p-card__text--body{
+    position: relative;
     padding: 32px 17px 44px;
     @include g.breakpoint(tablet){
         width: 100%;

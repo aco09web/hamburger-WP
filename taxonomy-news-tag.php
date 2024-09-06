@@ -58,6 +58,7 @@
                 ?>
                     <li class="p-card-news">
                         <div class="p-card-news__body">
+                            <div class="<?php echo function_new_icon(); ?>"></div>
                             <?php echo get_post_meta(get_the_ID(), 'cat_field', true); ?>
                             <figure class="p-card-news__image--container">
                                 <?php if (has_post_thumbnail()) : //もしアイキャッチが登録されていたら 

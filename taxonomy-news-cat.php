@@ -69,6 +69,8 @@
                                 <?php endif; ?>
                             </figure>
                             <div class="p-card-news__text--body">
+                                <div class="<?php echo function_new_icon(); //NEWアイコンの表示
+                                            ?>"></div>
                                 <h3 class="p-card-news__title c-text--bold c-font-size--primary c-text--brown"><?php the_title(); ?></h3>
                                 <ul class="c-flex">
                                     <?php

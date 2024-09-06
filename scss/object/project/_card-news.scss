@@ -14,7 +14,6 @@
     justify-content: center;
     }
 }
-
 .p-card-news__image--container{
     position: relative;
 }
@@ -33,6 +32,7 @@
 }
 .p-card-news__text--body{
     padding: 18px 2px 5px;
+    position: relative;
     @include g.breakpoint(tablet){
         width: 100%;
         padding: 5px 27px 5px;

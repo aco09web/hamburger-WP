@@ -60,6 +60,18 @@ function custom_script_loader_tag($tag, $handle)
     return str_replace('></script>', ' crossorigin="anonymous"></script>', $tag);
 }
 
+//新しい投稿に14日間NEWアイコンを表示
+function function_new_icon()
+{
+    $days = 14;
+    $now = date_i18n('U');
+    $entry = get_the_time('U');
+    $term = date('U', ($now - $entry)) / 86400;
+    if ($days > $term) {
+        $data = 'c-icon-new c-text--white c-text--bold';
+        return $data;
+    }
+}
 
 //ナビゲーションメニュー
 //2つのナビゲーションメニューを登録する
