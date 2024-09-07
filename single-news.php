@@ -37,6 +37,10 @@
                     <?php
                     if (is_active_acf()) : //ACFプラグインが有効になっている場合
                     ?>
+                        <?php //ページ情報を取得
+                        $this_obj = get_queried_object();
+                        //投稿ID
+                        $post_id = $this_obj->ID; ?>
                         <?php if (get_field('recommend-info', $post_id)) : // おすすめ情報タイトルがカスタムフィールドにある場合
                         ?>
                             <h3 class="p-recommend__title c-text--bold c-icon-star__primary">おすすめ情報</h3>

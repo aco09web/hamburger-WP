@@ -54,7 +54,6 @@
                 ?>
                     <li id="post-<?php the_ID(); ?>" <?php post_class('p-card'); ?>>
                         <div class="p-card__body">
-                            <div class="<?php echo function_new_icon(); ?>"></div>
                             <?php echo get_post_meta(get_the_ID(), 'cat_field', true); ?>
                             <figure class="p-card__image--container">
                                 <?php if (has_post_thumbnail()) : //もしアイキャッチが登録されていたら 
@@ -66,6 +65,8 @@
                                 <?php endif; ?>
                             </figure>
                             <div class="p-card__text--body">
+                                <div class="<?php echo function_new_icon(); //NEWアイコンの表示
+                                            ?>"></div>
                                 <h3 class="p-card__title c-text--bold c-text--white"><?php esc_html(the_title()); ?></h3>
                                 <p class="p-card__subtitle c-text--bold c-text--white">
                                     <?php $excerpt = esc_html(get_the_excerpt());

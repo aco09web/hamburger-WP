@@ -67,6 +67,8 @@
                                 <?php endif; ?>
                             </figure>
                             <div class="p-card__text--body">
+                                <div class="<?php echo function_new_icon(); //NEWアイコンの表示
+                                            ?>"></div>
                                 <h3 class="p-card__title c-text--bold c-text--white"><?php the_title(); ?></h3>
                                 <p class="p-card__subtitle c-text--bold c-text--white"><?php echo esc_html(get_the_excerpt()); ?></p>
                                 <p class="p-card__text c-text--white c-font-size--primary">

@@ -34,7 +34,6 @@
     transform: translateY(-50%);
     display: flex;
     align-items: center;
-    flex-direction: column;
     @include g.breakpoint(tablet){
         flex-direction: row;
         font-size: 6.0rem;
